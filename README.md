@@ -11,6 +11,8 @@ Carlos Ordoño Moraleda
 
 npm install -g json-server
 
+npm install axios
+
 ## Execute
 
 DB: json-server --watch db.json --port 3002
