@@ -7,6 +7,18 @@ Web application with Angular + NodeJS + Express in which we are going to impleme
 
 Carlos Ordoño Moraleda
 
+## Install 
+
+npm install -g json-server
+
+## Execute
+
+DB: json-server --watch db.json --port 3002
+
+BackEnd: DEBUG=backend:* npm start (port 3001)
+
+FrontEnd: npm start (port 3000)
+
 
 
 
