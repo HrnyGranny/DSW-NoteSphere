@@ -1,5 +1,5 @@
 # DSW-NoteSphere
-Web application with Angular + NodeJS + Express in which we are going to implement a web system for managing notes, thoughts, lists, task reminders, etc. 
+Web application with Ruby + NodeJS + Express in which we are going to implement a web system for managing notes, thoughts, lists, task reminders, etc. 
 
 ## Authors
 
@@ -15,7 +15,7 @@ npm install axios
 
 ## Execute
 
-DB: json-server --watch db.json --port 3002
+DB: json-server --watch db.json --port 3002 (port 3002)
 
 BackEnd: DEBUG=backend:* npm start (port 3001)
 
