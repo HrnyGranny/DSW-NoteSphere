@@ -4,22 +4,12 @@ const Note = require('../models/note');
 const authenticateToken = require('../middleware/authenticate');
 
 // Obtener todas las notas
-router.get('/', async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
     try {
         const notes = await Note.find(); // Obtener todas las notas
         res.json(notes); // Devolver las notas como JSON
     } catch (err) {
         res.status(500).json({ message: err.message }); // Manejar errores
-    }
-});
-
-// Obtener todas las notas
-router.get('/', async (req, res) => {
-    try {
-        const notes = await Note.find({ user: req.user.id });
-        res.json(notes);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
     }
 });
 

@@ -11,10 +11,9 @@ router.post('/login', async (req, res) => {
     if (!user) {
         return res.status(404).json({ message: "Usuario no encontrado" });
     }
-
+    
     // Verificar la contraseña
-    const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!validPassword) {
+    if (req.body.password !== user.password) {
         return res.status(401).json({ message: "Contraseña incorrecta" });
     }
 

@@ -14,7 +14,7 @@ import { NotesService } from './notes.service';
 import { AuthService } from './auth.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/notes', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'notes', component: NoteListComponent },
   { path: 'notes/create', component: NoteCreateComponent },
   { path: 'login', component: LoginComponent }
