@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; // Importa el módulo HttpClientModule
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'; // Importa el módulo HttpClientModule
 import { FormsModule } from '@angular/forms'; // Si vas a usar formularios template-driven
 
+//Components
 import { AppComponent } from './app.component';
 import { NoteListComponent } from './note-list/note-list.component';
 import { NoteCreateComponent } from './note-create/note-create.component';
@@ -12,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 // Importa los servicios
 import { NotesService } from './notes.service';
 import { AuthService } from './auth.service';
+import { AuthInterceptor } from './auth.interceptor'; 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -30,15 +32,18 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    HttpClientModule, // Agrega el módulo HttpClientModule
-    FormsModule // Si vas a usar formularios template-driven
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
-    // Provee los servicios
     NotesService,
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
