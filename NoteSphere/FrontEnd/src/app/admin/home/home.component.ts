@@ -16,6 +16,18 @@ export class HomeComponent implements OnInit {
     this.username = this.authService.getUser();
   }
 
+  notesAdm(): void {
+    this.router.navigate(['/admin/notesAdm']);
+  }
+
+  usersAdm(): void {
+    this.router.navigate(['/admin/usersAdm']);
+  }
+  
+  friendshipAdm(): void {
+    this.router.navigate(['/admin/friendshipAdm']);
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']); // Redirige al usuario al LoginComponent

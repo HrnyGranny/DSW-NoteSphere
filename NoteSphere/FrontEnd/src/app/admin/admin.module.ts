@@ -7,7 +7,10 @@ import { UsersAdmComponent } from './users-adm/users-adm.component';
 import { FriendshipAdmComponent } from './friendship-adm/friendship-adm.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'notesAdm', component: NotesAdmComponent },
+  { path: 'usersAdm', component: UsersAdmComponent },
+  { path: 'friendshipAdm', component: FriendshipAdmComponent }
 ];
 
 @NgModule({

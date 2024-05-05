@@ -1,0 +1,21 @@
+.main-action-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajusta según sea necesario */
+  }
+  
+  .main-action-button button {
+    padding: 15px 30px; /* Ajusta el tamaño del botón */
+    font-size: 18px;
+    border: none;
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto */
+    cursor: pointer;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease;
+  }
+  
+  .main-action-button button:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el ratón */
+  }
+  

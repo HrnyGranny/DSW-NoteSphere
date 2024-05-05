@@ -4,16 +4,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NotesComponent } from './notes/notes.component';
 import { FriendshipComponent } from './friendship/friendship.component';
+import { NotesCreateComponent } from './notes-create/notes-create.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'notes', component: NotesComponent },
+  { path: 'friendship', component: FriendshipComponent }
 ];
 
 @NgModule({
   declarations: [
     HomeComponent,
     NotesComponent,
-    FriendshipComponent
+    FriendshipComponent,
+    NotesCreateComponent
   ],
   imports: [
     CommonModule,

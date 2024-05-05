@@ -1,12 +1,17 @@
 <div class="navbar">
-    <div class="navbar-brand">{{ username }}</div>
-    <div class="navbar-buttons">
-      <button (click)="deleteAccount()">Eliminar cuenta</button>
-      <button (click)="logout()">Salir</button>
-    </div>
+  <div class="navbar-brand">{{ username }}</div>
+  <div class="navbar-buttons">
+    <button (click)="deleteAccount()">Eliminar cuenta</button>
+    <button (click)="logout()">Salir</button>
   </div>
-  
-  <div class="content">
-    <!-- Aquí puedes agregar el contenido específico de la página de inicio del administrador -->
+</div>
+
+<div class="content">
+  <div class="main-action-button">
+    <button (click)="notes()">Notes</button>
   </div>
-  
+  <div class="main-action-button">
+    <button (click)="friendship()">Friendship</button>
+  </div>
+  <!-- Otro contenido específico de la página de inicio -->
+</div>
