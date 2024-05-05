@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoteCreateComponent } from './note-create.component';
+import { UsersAdmComponent } from './users-adm.component';
 
-describe('NoteCreateComponent', () => {
-  let component: NoteCreateComponent;
-  let fixture: ComponentFixture<NoteCreateComponent>;
+describe('UsersAdmComponent', () => {
+  let component: UsersAdmComponent;
+  let fixture: ComponentFixture<UsersAdmComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NoteCreateComponent]
+      declarations: [UsersAdmComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(NoteCreateComponent);
+    fixture = TestBed.createComponent(UsersAdmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

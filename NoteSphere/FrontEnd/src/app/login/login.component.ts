@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +18,15 @@ export class LoginComponent {
     this.authService.login(this.username, this.password)
       .subscribe(
         () => {
-          // Inicio de sesión exitoso, redirigir a la página de notas
-          this.router.navigate(['/notes']);
+          const role = this.authService.getRole();
+          if (role === 'Y') {
+            this.router.navigate(['/admin']); // Redirige al módulo de administrador
+          } else {
+            this.router.navigate(['/user']); // Redirige al módulo de usuario normal
+          }
         },
         error => {
-          this.error = error.error.message; // Manejar el mensaje de error devuelto por el servidor
+          this.error = error.error.message;
         }
       );
   }

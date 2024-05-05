@@ -6,16 +6,21 @@ const authenticateToken = require('../middleware/authenticate');
 // Obtener todas las notas
 router.get('/', authenticateToken, async (req, res) => {
     try {
-        const notes = await Note.find(); // Obtener todas las notas
-        res.json(notes); // Devolver las notas como JSON
+        const notes = await Note.find();
+        res.json(notes);
     } catch (err) {
-        res.status(500).json({ message: err.message }); // Manejar errores
+        res.status(500).json({ message: err.message });
     }
 });
 
-// Obtener una nota por su ID
-router.get('/:id', authenticateToken, getNote, (req, res) => {
-    res.json(res.note);
+// Obtener todas las notas del usuario por su propietario
+router.get('/owner/:owner', authenticateToken, async (req, res) => {
+    try {
+        const notes = await Note.find({ owner: req.params.owner });
+        res.json(notes);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 
 // Crear una nota
@@ -23,8 +28,7 @@ router.post('/', authenticateToken, async (req, res) => {
     const note = new Note({
         title: req.body.title,
         content: req.body.content,
-        type: req.body.type,
-        user: req.user.id
+        owner: req.user.username // Asigna el propietario como el nombre de usuario autenticado
     });
 
     try {
@@ -35,47 +39,14 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 });
 
-// Actualizar una nota
-router.patch('/:id', authenticateToken, getNote, async (req, res) => {
-    if (req.body.title != null) {
-        res.note.title = req.body.title;
-    }
-    if (req.body.content != null) {
-        res.note.content = req.body.content;
-    }
-    if (req.body.type != null) {
-        res.note.type = req.body.type;
-    }
+// Eliminar una nota por su título
+router.delete('/:title', authenticateToken, async (req, res) => {
     try {
-        const updatedNote = await res.note.save();
-        res.json(updatedNote);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
-
-// Eliminar una nota
-router.delete('/:id', authenticateToken, getNote, async (req, res) => {
-    try {
-        await res.note.remove();
+        await Note.findOneAndDelete({ title: req.params.title });
         res.json({ message: 'Nota eliminada correctamente' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
-
-async function getNote(req, res, next) {
-    let note;
-    try {
-        note = await Note.findById(req.params.id);
-        if (note == null) {
-            return res.status(404).json({ message: 'Nota no encontrada' });
-        }
-    } catch (err) {
-        return res.status(500).json({ message: err.message });
-    }
-    res.note = note;
-    next();
-}
 
 module.exports = router;

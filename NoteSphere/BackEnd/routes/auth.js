@@ -17,9 +17,17 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ message: "Contraseña incorrecta" });
     }
 
+    // Obtener el rol del usuario
+    const role = user.admin;
+
+    //obtener el usuario
+    const userName = user.username;
+
     // Generar un token JWT
     const token = jwt.sign({ id: user._id }, 'secretKey');
-    res.json({ token: token });
+
+    // Devolver el token JWT y el rol del usuario
+    res.json({ token: token, role: role, user: userName });
 });
 
 module.exports = router;
