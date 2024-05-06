@@ -1,1 +1,10 @@
-<p>notes-adm works!</p>
+<div *ngFor="let nota of notas">
+    <div class="nota">
+      <h2>{{ nota.title }}</h2>
+      <div [innerHTML]="nota.content"></div>
+      <button (click)="editarNota(nota)">Editar</button>
+      <button (click)="borrarNota(nota._id)">Borrar</button>
+    </div>
+  </div>
+  
+

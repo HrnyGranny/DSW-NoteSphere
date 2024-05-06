@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../models/note');
-const authenticateToken = require('../middleware/authenticate');
 
 // Obtener todas las notas
 router.get('/', async (req, res) => {
@@ -28,7 +27,7 @@ router.post('/', async (req, res) => {
     const note = new Note({
         title: req.body.title,
         content: req.body.content,
-        owner: req.user.username // Asigna el propietario como el nombre de usuario autenticado
+        owner: req.body.owner // Asigna el propietario como el nombre de usuario enviado en el cuerpo de la solicitud
     });
 
     try {
@@ -40,7 +39,7 @@ router.post('/', async (req, res) => {
 });
 
 // Eliminar una nota por su título
-router.delete('/:title', authenticateToken, async (req, res) => {
+router.delete('/:title', async (req, res) => {
     try {
         await Note.findOneAndDelete({ title: req.params.title });
         res.json({ message: 'Nota eliminada correctamente' });
@@ -50,3 +49,4 @@ router.delete('/:title', authenticateToken, async (req, res) => {
 });
 
 module.exports = router;
+

@@ -24,7 +24,7 @@ export class NotesService {
   getNotesByOwner(owner: string): Observable<Note[]> {
     return this.http.get<Note[]>(`${this.apiUrl}/owner/${owner}`);
   }
-  
+
   createNote(newNote: Note): Observable<Note> {
     return this.http.post<Note>(this.apiUrl, newNote);
   }

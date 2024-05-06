@@ -1,1 +1,15 @@
-<p>notes works!</p>
+<div *ngIf="notas.length > 0">
+  <h2>Mis Notas</h2>
+  <div *ngFor="let nota of notas">
+    <div class="nota">
+      <h3>{{ nota.title }}</h3>
+      <div [innerHTML]="nota.content"></div>
+      <button (click)="eliminarNota(nota._id)">Eliminar</button>
+      <button (click)="compartirNota(nota)">Compartir</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="notas.length === 0">
+  <p>No hay notas disponibles.</p>
+</div>

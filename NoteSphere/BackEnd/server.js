@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser'); // Importa bodyParser
+
 const app = express();
 
 // Configuración de la conexión a MongoDB Atlas
@@ -9,9 +11,10 @@ mongoose.connect(MONGODB_URI)
 .then(() => console.log('Conexión a MongoDB Atlas establecida'))
 .catch(err => console.error('Error al conectar a MongoDB Atlas:', err));
 
-// Middleware para aceptar JSON en las solicitudes
+// Middleware para aceptar JSON en las solicitudes y configuración del límite de tamaño del cuerpo
 app.use(express.json());
 app.use(cors()); // Habilita CORS para todas las solicitudes
+app.use(bodyParser.json({ limit: '100mb' })); // Establece el límite de tamaño del cuerpo en 100MB
 
 // Rutas para las notas y los usuarios
 const notesRouter = require('./routes/notes');

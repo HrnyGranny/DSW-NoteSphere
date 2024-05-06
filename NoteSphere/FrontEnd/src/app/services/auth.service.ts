@@ -9,23 +9,32 @@ import { tap } from 'rxjs/operators';
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api/auth';
   private loggedIn = new BehaviorSubject<boolean>(false);
-  private authToken!: string;
-  private userRole!: string;
-  private user!: string;
+  private authTokenKey = 'authToken';
+  private userRoleKey = 'userRole';
+  private userKey = 'user';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // Verifica si localStorage está disponible antes de intentar usarlo
+    if (typeof localStorage !== 'undefined') {
+      // Verifica si hay un token almacenado al inicializar el servicio
+      const authToken = localStorage.getItem(this.authTokenKey);
+      if (authToken) {
+        this.loggedIn.next(true);
+      }
+    }
+  }
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password }).pipe(
       tap(response => {
         // Si el inicio de sesión es exitoso y se recibe un token JWT del servidor
         if (response && response.token) {
-          // Almacena el usuario
-          this.user = response.user;
-          // Almacena el token JWT en el servicio AuthService
-          this.authToken = response.token;
-          // Almacena el rol del usuario en el servicio AuthService
-          this.userRole = response.role;
+          // Almacena el usuario, el token y el rol en el almacenamiento local
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(this.userKey, response.user);
+            localStorage.setItem(this.authTokenKey, response.token);
+            localStorage.setItem(this.userRoleKey, response.role);
+          }
           // Actualiza el estado de autenticación a true
           this.loggedIn.next(true);
         }
@@ -38,21 +47,36 @@ export class AuthService {
   }
 
   getUser(): string {
-    return this.user;
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(this.userKey) || '';
+    }
+    return '';
   }
 
   getToken(): string {
-    return this.authToken;
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(this.authTokenKey) || '';
+    }
+    return '';
   }
 
   getRole(): string {
-    return this.userRole;
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(this.userRoleKey) || '';
+    }
+    return '';
   }
 
   logout(): void {
+    // Borra los datos de autenticación del almacenamiento local al cerrar sesión
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(this.authTokenKey);
+      localStorage.removeItem(this.userRoleKey);
+      localStorage.removeItem(this.userKey);
+    }
+    // Actualiza el estado de autenticación a false
     this.loggedIn.next(false);
-    this.authToken = ""; // Limpia el token almacenado al cerrar sesión
-    this.userRole = ""; // Limpia el rol almacenado al cerrar sesión
-    this.user = ""; // Limpia el usuario almacenado al cerrar sesión 
   }
 }
+
+
