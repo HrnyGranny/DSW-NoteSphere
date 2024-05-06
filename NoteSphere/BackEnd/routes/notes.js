@@ -4,7 +4,7 @@ const Note = require('../models/note');
 const authenticateToken = require('../middleware/authenticate');
 
 // Obtener todas las notas
-router.get('/', authenticateToken, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const notes = await Note.find();
         res.json(notes);
@@ -14,7 +14,7 @@ router.get('/', authenticateToken, async (req, res) => {
 });
 
 // Obtener todas las notas del usuario por su propietario
-router.get('/owner/:owner', authenticateToken, async (req, res) => {
+router.get('/owner/:owner', async (req, res) => {
     try {
         const notes = await Note.find({ owner: req.params.owner });
         res.json(notes);
@@ -24,7 +24,7 @@ router.get('/owner/:owner', authenticateToken, async (req, res) => {
 });
 
 // Crear una nota
-router.post('/', authenticateToken, async (req, res) => {
+router.post('/', async (req, res) => {
     const note = new Note({
         title: req.body.title,
         content: req.body.content,

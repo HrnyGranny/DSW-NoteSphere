@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module'; // Importa el módulo de enrutamiento
+import { CKEditorModule } from 'ckeditor4-angular';
 
 //Components
 import { AppComponent } from './app.component';
@@ -23,7 +24,8 @@ import { AuthGuard } from './services/auth.guard';
     BrowserModule,
     AppRoutingModule, // Importa el módulo de enrutamiento
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CKEditorModule
   ],
   providers: [
     AuthService,
