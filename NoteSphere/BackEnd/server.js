@@ -19,11 +19,13 @@ app.use(bodyParser.json({ limit: '100mb' })); // Establece el límite de tamaño
 // Rutas para las notas y los usuarios
 const notesRouter = require('./routes/notes');
 const usersRouter = require('./routes/users');
+const friendsRouter = require('./routes/friends');
 const authRouter = require('./routes/auth');
 
-app.use('/api/auth', authRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/friends', friendsRouter);
+app.use('/api/auth', authRouter);
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;

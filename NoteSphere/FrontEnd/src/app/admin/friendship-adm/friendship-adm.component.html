@@ -1,1 +1,7 @@
-<p>friendship-adm works!</p>
+<div *ngFor="let user of users">
+    <h2>{{ user.username }}</h2>
+    <div *ngFor="let friend of user.friends">
+      <p>{{ friend.friend }}</p>
+      <button (click)="deleteFriend(user.username, friend._id || 'default')">Delete</button>
+    </div>
+  </div>
