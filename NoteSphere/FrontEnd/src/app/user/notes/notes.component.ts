@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Note } from '../models/note.model';
 import { NotesService } from '../services/notes.service';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notas',
@@ -12,7 +13,7 @@ export class NotesComponent implements OnInit {
   notas: Note[] = [];
   username: string = '';
 
-  constructor(private notesService: NotesService, private authService: AuthService) { }
+  constructor(private notesService: NotesService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
@@ -47,6 +48,10 @@ export class NotesComponent implements OnInit {
   compartirNota(nota: Note): void {
     // Implementa aquí la lógica para compartir la nota
     console.log('Compartiendo nota:', nota);
+  }
+
+  navigateToCreateNote(): void {
+    this.router.navigate(['/user/notes/create']);
   }
 }
 

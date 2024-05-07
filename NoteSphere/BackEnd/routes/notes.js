@@ -38,10 +38,13 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Eliminar una nota por su título
-router.delete('/:title', async (req, res) => {
+// Eliminar una nota por su ID
+router.delete('/:id', async (req, res) => {
     try {
-        await Note.findOneAndDelete({ title: req.params.title });
+        const deletedNote = await Note.findByIdAndDelete(req.params.id);
+        if (!deletedNote) {
+            return res.status(404).json({ message: 'Nota no encontrada' });
+        }
         res.json({ message: 'Nota eliminada correctamente' });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -49,4 +52,3 @@ router.delete('/:title', async (req, res) => {
 });
 
 module.exports = router;
-
