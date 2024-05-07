@@ -32,16 +32,17 @@ export class NotesAdmComponent implements OnInit {
     console.log('Editar nota:', nota);
   }
 
-  borrarNota(id: string): void {
-    this.notesService.deleteNote(id).subscribe(
-      () => {
-        // Elimina la nota de la lista de notas
-        this.notas = this.notas.filter(nota => nota._id !== id);
-        console.log('Nota borrada con éxito');
-      },
-      error => {
-        console.error('Error al borrar la nota:', error);
-      }
-    );
+  eliminarNota(id: string): void {
+    if (confirm('¿Estás seguro de que quieres eliminar esta nota?')) {
+      this.notesService.deleteNote(id).subscribe(
+        () => {
+          // Eliminar la nota de la lista local de notas
+          this.notas = this.notas.filter(nota => nota._id !== id);
+        },
+        error => {
+          console.error('Error al eliminar la nota:', error);
+        }
+      );
+    }
   }
 }

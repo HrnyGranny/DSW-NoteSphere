@@ -3,7 +3,7 @@
       <h2>{{ nota.title }}</h2>
       <div [innerHTML]="nota.content"></div>
       <button (click)="editarNota(nota)">Editar</button>
-      <button (click)="borrarNota(nota._id)">Borrar</button>
+      <button class="btn btn-danger" (click)="nota._id && eliminarNota(nota._id)">Eliminar</button>
     </div>
   </div>
   

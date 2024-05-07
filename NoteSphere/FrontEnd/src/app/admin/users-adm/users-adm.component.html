@@ -1,1 +1,25 @@
-<p>users-adm works!</p>
+<div class="container">
+    <h2>User List</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Admin</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.username }}</td>
+          <td>{{ user.password }}</td>
+          <td>{{ user.admin }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editUser(user)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteUser(user.username)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
