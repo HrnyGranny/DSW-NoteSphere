@@ -1,20 +1,27 @@
 <div class="navbar">
-  <div class="navbar-brand">{{ username }}</div>
-  <div class="navbar-buttons">
-    <button (click)="deleteAccount()">Eliminar cuenta</button>
+  <!-- <div class="navbar-brand">{{ username }}</div> -->
+  <div class="welcome-banner">
+    ¡Bienvenido <span id="username">{{ username }}</span>!
+    <div class="user-profile" (click)="toggleDropdown()">
+      <img src="\home\serProfile.webp" alt="user image" class="profile-img">
+      <div class="dropdown-menu" [class.active]="isDropdownActive">
+        <span>{{ username }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content">
+    <div class="main-action-button">
+      <button (click)="notesAdm()">Notes</button>
+    </div>
+    <div class="main-action-button">
+      <button (click)="usersAdm()">Users</button>
+    </div>
+    <div class="main-action-button">
+      <button (click)="friendshipAdm()">Friendship</button>
+    </div>
+  </div>
+  
+  <div class="logout-button">
     <button (click)="logout()">Salir</button>
-  </div>
-</div>
-
-<div class="content">
-  <div class="main-action-button">
-    <button (click)="notesAdm()">Notes</button>
-  </div>
-  <div class="main-action-button">
-    <button (click)="usersAdm()">Users</button>
-  </div>
-  <div class="main-action-button">
-    <button (click)="friendshipAdm()">Friendship</button>
-  </div>
-  <!-- Otro contenido específico de la página de inicio -->
-</div>
+  </div>  

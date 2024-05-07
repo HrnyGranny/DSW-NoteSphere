@@ -9,11 +9,16 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomeComponent implements OnInit {
   username: string = '';
+  isDropdownActive: boolean = false;  // Estado para controlar la visibilidad del menú desplegable
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownActive = !this.isDropdownActive;  // Toggle la visibilidad del menú desplegable
   }
 
   notesAdm(): void {
@@ -30,10 +35,10 @@ export class HomeComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']); // Redirige al usuario al LoginComponent
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
   }
 
   deleteAccount(): void {
-    // Aquí puedes implementar la lógica para eliminar la cuenta del usuario
+    // Implementa la lógica para eliminar la cuenta del usuario
   }
 }
