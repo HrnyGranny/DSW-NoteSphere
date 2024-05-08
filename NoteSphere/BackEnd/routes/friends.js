@@ -38,9 +38,9 @@ router.post('/', async (req, res) => {
 });
 
 // Eliminar un amigo por su nombre de usuario
-router.delete('/username/:username', async (req, res) => {
+router.delete('/username/:username/friend/:friend', async (req, res) => {
     try {
-        const deletedFriend = await Friend.findOneAndDelete({ username: req.params.username });
+        const deletedFriend = await Friend.findOneAndDelete({ username: req.params.username, friend: req.params.friend });
         if (!deletedFriend) {
             return res.status(404).json({ message: 'Amigo no encontrado' });
         }
