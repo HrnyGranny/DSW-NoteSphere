@@ -3,6 +3,8 @@ import { Note } from '../models/note.model';
 import { NotesService } from '../services/notes.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
+import { UserService } from '../services/users.service';
 
 @Component({
   selector: 'app-notas',
@@ -11,13 +13,15 @@ import { Router } from '@angular/router';
 })
 export class NotesComponent implements OnInit {
   notas: Note[] = [];
+  usuarios: User[] = [];
   username: string = '';
 
-  constructor(private notesService: NotesService, private authService: AuthService, private router: Router) { }
+  constructor(private notesService: NotesService, private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
     this.obtenerNotasPorUsuario(this.username);
+    this.obtenerUsuarios();
   }
 
   obtenerNotasPorUsuario(usuario: string): void {
@@ -27,6 +31,17 @@ export class NotesComponent implements OnInit {
       },
       error => {
         console.error('Error al obtener las notas:', error);
+      }
+    );
+  }
+
+  obtenerUsuarios(): void {
+    this.userService.getAllUsers().subscribe(
+      usuarios => {
+        this.usuarios = usuarios;
+      },
+      error => {
+        console.error('Error al obtener los usuarios:', error);
       }
     );
   }
@@ -45,9 +60,31 @@ export class NotesComponent implements OnInit {
     }
   }
 
-  compartirNota(nota: Note): void {
-    // Implementa aquí la lógica para compartir la nota
-    console.log('Compartiendo nota:', nota);
+  editarNota(nota: Note): void {
+    // Aquí puedes implementar la lógica para editar la nota
+  }
+
+  compartirNota(nota: Note, usuario: User): void {
+    if (usuario.username === this.username) {
+      alert('No puedes compartir una nota contigo mismo.');
+      return;
+    }
+  
+    this.notesService.getNotesByOwner(usuario.username).subscribe(
+      notasUsuario => {
+        const notaExistente = notasUsuario.find(n => n.title === nota.title && n.content === nota.content);
+        if (notaExistente) {
+          alert('El usuario ya tiene esta nota.');
+        } else {
+          const nuevaNota = { ...nota, owner: usuario.username };
+          this.notesService.createNote(nuevaNota).subscribe(
+            () => console.log('Nota compartida con éxito'),
+            error => console.error(error)
+          );
+        }
+      },
+      error => console.error(error)
+    );
   }
 
   navigateToCreateNote(): void {

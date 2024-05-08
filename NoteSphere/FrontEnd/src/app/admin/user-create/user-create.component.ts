@@ -49,7 +49,7 @@ export class UserCreateComponent {
           this.userService.createUser(newUser).subscribe(
             () => {
               console.log('Usuario creado correctamente.');
-              this.router.navigate(['/usersAdm/create']);
+              this.router.navigate(['admin/usersAdm']);
             },
             error => {
               console.error('Error al crear usuario:', error);
