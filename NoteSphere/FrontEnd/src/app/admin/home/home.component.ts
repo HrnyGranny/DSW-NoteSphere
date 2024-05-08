@@ -10,16 +10,11 @@ import { UserService } from '../services/users.service';
 })
 export class HomeComponent implements OnInit {
   username: string = '';
-  isDropdownActive: boolean = false;  // Estado para controlar la visibilidad del menú desplegable
 
   constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
-  }
-
-  toggleDropdown(): void {
-    this.isDropdownActive = !this.isDropdownActive;  // Toggle la visibilidad del menú desplegable
   }
 
   notesAdm(): void {
