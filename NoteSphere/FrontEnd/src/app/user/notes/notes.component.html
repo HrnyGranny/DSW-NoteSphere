@@ -20,7 +20,15 @@
           <h5 class="card-title">{{ nota.title }}</h5>
           <div [innerHTML]="nota.content"></div>
           <button class="btn btn-danger" (click)="eliminarNota(nota._id)">Eliminar</button>
-          <button class="btn btn-success" (click)="compartirNota(nota)">Compartir</button>
+          <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Compartir
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" *ngFor="let usuario of usuarios" (click)="compartirNota(nota, usuario)">{{ usuario.username }}</a>
+            </div>
+          </div>
+          <button class="btn btn-primary" (click)="editarNota(nota)">Editar</button>
         </div>
       </div>
     </div>
