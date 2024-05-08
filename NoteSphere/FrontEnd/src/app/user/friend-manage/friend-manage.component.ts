@@ -29,11 +29,18 @@ export class FriendManageComponent implements OnInit {
   addFriend(): void {
     this.userService.checkUsernameExists(this.searchUser).subscribe(exists => {
       if (exists) {
+        // Crear la amistad del usuario actual al amigo
         this.friendsService.createFriend({
           username: this.username, friend: this.searchUser,
           _id: ''
         }).subscribe(() => {
-          this.loadFriends();
+          // Crear la amistad del amigo al usuario actual
+          this.friendsService.createFriend({
+            username: this.searchUser, friend: this.username,
+            _id: ''
+          }).subscribe(() => {
+            this.loadFriends();
+          });
         });
       } else {
         alert('El usuario no existe');
@@ -42,8 +49,12 @@ export class FriendManageComponent implements OnInit {
   }
 
   deleteFriend(friend: string): void {
+    // Eliminar la amistad del usuario actual al amigo
     this.friendsService.deleteFriendByUsername(this.username, friend).subscribe(() => {
-        this.loadFriends();
+        // Eliminar la amistad del amigo al usuario actual
+        this.friendsService.deleteFriendByUsername(friend, this.username).subscribe(() => {
+            this.loadFriends();
+        });
     });
 }
 }
