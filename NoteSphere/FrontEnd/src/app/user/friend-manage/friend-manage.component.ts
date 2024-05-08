@@ -27,6 +27,11 @@ export class FriendManageComponent implements OnInit {
   }
 
   addFriend(): void {
+    if (this.searchUser === this.username) {
+      alert('No puedes hacerte amigo de ti mismo.');
+      return;
+    }
+  
     this.userService.checkUsernameExists(this.searchUser).subscribe(exists => {
       if (exists) {
         // Crear la amistad del usuario actual al amigo

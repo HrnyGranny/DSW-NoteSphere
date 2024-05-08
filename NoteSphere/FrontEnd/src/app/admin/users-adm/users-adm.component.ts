@@ -28,10 +28,6 @@ export class UsersAdmComponent implements OnInit {
     );
   }
 
-  editUser(user: User): void {
-    
-  }
-
   deleteUser(username: string): void {
     if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
       this.userService.deleteUser(username).subscribe(
@@ -44,5 +40,9 @@ export class UsersAdmComponent implements OnInit {
         }
       );
     }
+  }
+
+  navigateToCreateUser(): void {
+    this.router.navigate(['admin/usersAdm/create']);
   }
 }
