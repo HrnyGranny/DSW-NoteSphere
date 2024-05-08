@@ -1,100 +1,80 @@
 /* Reset básico y estilos generales */
-body, html {
+.container {
   margin: 0;
   padding: 0;
   font-family: 'DM Sans', sans-serif;
-  background-color: #FDFEEE; /* Amarillo para el fondo de toda la aplicación */
+  background-color: #FDFEEE; /* Color de fondo amarillo claro */
+  height: 100vh; 
+  overflow-x: hidden; /* Evitar desbordamiento horizontal */
+  overflow-y: auto; /* Permitir desplazamiento vertical solo si es necesario */
 }
 
 /* Banner de bienvenida en la barra de navegación */
 .welcome-banner {
-  background-color: #FDFEEE; /* Amarillo claro */
-  color: black; /* Texto negro para el saludo */
-  padding: 20px;
+  background-color: #5E7F88; /* Azul oscuro */
+  color: white;
+  padding: 40px 20px;
   text-align: center;
-  font-size: 24px;
-  border-bottom: 5px solid #7EB19C; /* Borde verde */
+  font-size: 30px;
+  font-family: 'Oswald', sans-serif;
+  border-bottom: 5px solid #FBB566; /* Borde naranja */
   width: 100%;
-  box-sizing: border-box;
-  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Perfil de usuario y menú desplegable */
-.user-profile {
-  cursor: pointer;
-  position: absolute;
-  right: 10px; /* Posiciona el perfil en el extremo derecho */
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.profile-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%; 
-  display: block; 
-}
-  
-.dropdown-menu {
-  display: none; 
-  position: absolute;
-  right: 0;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  border-radius: 5px;
-  padding: 10px;
-  z-index: 100; 
-}
-  
-.dropdown-menu.active {
-  display: block; 
-}
-  
-.dropdown-menu span, .dropdown-menu button {
-  display: block; 
-}
-  
-.navbar-buttons {
-  display: none; 
-}
-  
-
+/* Estilos para el contenido principal */
 .content {
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 90%; 
-  margin: 40px auto; 
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; 
+  flex-direction: row; /* Estructura vertical */
+  align-items: center;
+  justify-content: center; /* Centrado vertical completo */
+  min-height: calc(100% - 240px); /* Altura ajustada para evitar desbordamiento */
 }
-  
 
+/* Botones de acción principal */
 .main-action-button button {
-  background-color: #FBB566; 
+  background-color: #FBB566;
   color: white;
-  padding: 15px 30px;
+  padding: 50px 100px;
   border-radius: 8px;
-  margin: 10px;
-  font-size: 18px; 
+  margin: 50px;
+  font-size: 24px;
   cursor: pointer;
+  box-shadow: 0 7px 14px rgba(0,0,0,0.1);
 }
-  
-.main-action-button button:hover {
-  background-color: #E6A257; 
+
+/* Nuevo banner inferior para salida */
+.logout-banner {
+  background-color: #5E7F88; /* Azul oscuro */
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  font-family: 'Oswald', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.1); /* Sombra hacia arriba */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 5px solid #FBB566; /* Barra divisoria naranja */
 }
-  
 
 .logout-button {
-  text-align: center;
-  padding: 20px;
-  width: 100%; 
+  margin-right: 50px; /* Margen derecha */
 }
 
 .logout-button button {
-  background-color: #FBB566; 
+  background-color: #FBB566;
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.main-action-button button:hover {
+  background-color: #F8C183; /* Cambia el color de fondo al pasar el ratón */
+}
+

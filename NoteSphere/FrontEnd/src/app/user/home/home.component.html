@@ -1,17 +1,21 @@
-<div class="navbar">
-  <div class="navbar-brand">{{ username }}</div>
-  <div class="navbar-buttons">
-    <button (click)="deleteAccount()">Eliminar cuenta</button>
-    <button (click)="logout()">Salir</button>
+<div class="container">
+  <div class="welcome-banner">
+    <span id="username">NoteSphere</span>
   </div>
-</div>
+  
+  <div class="content">
+    <div class="main-action-button">
+      <button (click)="notes()">Notes</button>
+    </div>
+    <div class="main-action-button">
+      <button (click)="friendship()">Friendship</button>
+    </div>
+  </div>
 
-<div class="content">
-  <div class="main-action-button">
-    <button (click)="notes()">Notes</button>
+  <div class="logout-banner">
+    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Salir</button>
+    </div>
   </div>
-  <div class="main-action-button">
-    <button (click)="friendship()">Friendship</button>
-  </div>
-  <!-- Otro contenido específico de la página de inicio -->
 </div>

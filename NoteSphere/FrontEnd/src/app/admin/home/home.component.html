@@ -1,13 +1,6 @@
-<div class="navbar">
-  <!-- <div class="navbar-brand">{{ username }}</div> -->
+<div class="container">
   <div class="welcome-banner">
-    ¡Bienvenido <span id="username">{{ username }}</span>!
-    <div class="user-profile" (click)="toggleDropdown()">
-      <img src="\home\serProfile.webp" alt="user image" class="profile-img">
-      <div class="dropdown-menu" [class.active]="isDropdownActive">
-        <span>{{ username }}</span>
-      </div>
-    </div>
+    <span id="username">NoteSphere</span>
   </div>
   
   <div class="content">
@@ -21,7 +14,11 @@
       <button (click)="friendshipAdm()">Friendship</button>
     </div>
   </div>
-  
-  <div class="logout-button">
-    <button (click)="logout()">Salir</button>
-  </div>  
+
+  <div class="logout-banner">
+    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Salir</button>
+    </div>
+  </div>
+</div>
