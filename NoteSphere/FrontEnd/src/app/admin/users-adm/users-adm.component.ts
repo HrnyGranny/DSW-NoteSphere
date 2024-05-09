@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/users.service';
-import { User } from '../models/user.model';
+import { UserService } from '../../services/users.service';
+import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -32,6 +32,11 @@ export class UsersAdmComponent implements OnInit {
   }
 
   deleteUser(username: string): void {
+    if (username === this.username) {
+      alert('You can not delete yourself');
+      return;
+    }
+  
     if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
       this.userService.deleteUser(username).subscribe(
         () => {
@@ -47,6 +52,10 @@ export class UsersAdmComponent implements OnInit {
 
   navigateToCreateUser(): void {
     this.router.navigate(['admin/usersAdm/create']);
+  }
+
+  navigateToEditUser(username: string): void {
+    this.router.navigate(['admin/usersAdm/edit', username]);
   }
 
   logout(): void {

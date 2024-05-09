@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FriendsService } from '../services/friends.service';
-import { Friend } from '../models/friend.model';
+import { FriendsService } from '../../services/friends.service';
+import { Friend } from '../../models/friend.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -34,14 +34,14 @@ export class FriendshipAdmComponent implements OnInit {
     });
   }
 
-  deleteFriend(username: string, friendId: string | undefined): void {
-    if (friendId) {
-      this.friendsService.deleteFriendByUsername(username).subscribe(() => {
+  deleteFriend(username: string, friend: string): void {
+    // Eliminar la amistad del usuario seleccionado al amigo
+    this.friendsService.deleteFriendByUsername(username, friend).subscribe(() => {
+      // Eliminar la amistad del amigo al usuario seleccionado
+      this.friendsService.deleteFriendByUsername(friend, username).subscribe(() => {
         this.getAllFriends(); // Actualiza la lista de amigos después de eliminar un amigo
       });
-    } else {
-      console.error('friendId is undefined');
-    }
+    });
   }
 
   return(): void {

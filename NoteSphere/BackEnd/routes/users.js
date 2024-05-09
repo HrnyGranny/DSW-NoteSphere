@@ -65,4 +65,19 @@ router.get('/exists/:username', async (req, res) => {
     }
 });
 
+// Route to get a user by username
+router.get('/:username', async (req, res) => {
+    const { username } = req.params;
+    try {
+        const user = await User.findOne({ username });
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;
