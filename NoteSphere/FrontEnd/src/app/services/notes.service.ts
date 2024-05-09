@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface Note {
-  _id: string;
-  title: string;
-  content: string;
-  owner: string;
-}
+import { Note } from '../models/note.model';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  private apiUrl = 'http://localhost:3000/api/notes'; 
+  
+  private apiUrl = `${environment.apiUrl}/api/notes`;
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +24,7 @@ export class NotesService {
   getNoteById(noteId: string): Observable<Note> {
     return this.http.get<Note>(`${this.apiUrl}/${noteId}`);
   }
-  
+
   createNote(newNote: Note): Observable<Note> {
     return this.http.post<Note>(this.apiUrl, newNote);
   }

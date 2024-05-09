@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../services/users.service';
-import { FriendsService } from '../services/friends.service';
+import { UserService } from '../../services/users.service';
+import { FriendsService } from '../../services/friends.service';
 
 @Component({
   selector: 'app-friend-manage',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FriendsService } from '../services/friends.service';
-import { Friend } from '../models/friend.model';
+import { FriendsService } from '../../services/friends.service';
+import { Friend } from '../../models/friend.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 

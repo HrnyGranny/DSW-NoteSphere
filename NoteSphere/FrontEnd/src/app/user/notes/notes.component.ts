@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from '../models/note.model';
-import { NotesService } from '../services/notes.service';
+import { Note } from '../../models/note.model';
+import { NotesService } from '../../services/notes.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../models/user.model';
-import { UserService } from '../services/users.service';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/users.service';
 
 @Component({
   selector: 'app-notas',

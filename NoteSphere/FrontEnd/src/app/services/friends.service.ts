@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface Friend {
-  _id: string;
-  username: string;
-  friend: string;
-}
+import { Friend } from '../models/friend.model';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FriendsService {
-  private apiUrl = 'http://localhost:3000/api/friends'; 
+
+  private apiUrl = `${environment.apiUrl}/api/friends`;
 
   constructor(private http: HttpClient) { }
 

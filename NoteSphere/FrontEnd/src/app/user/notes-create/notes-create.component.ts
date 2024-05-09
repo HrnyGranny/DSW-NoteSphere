@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { NotesService } from '../services/notes.service';
-import { Note } from '../models/note.model';
+import { NotesService } from '../../services/notes.service';
+import { Note } from '../../models/note.model';
 import { v4 as uuidv4 } from 'uuid'; // Importa la función uuidv4 de la biblioteca uuid
 
 @Component({

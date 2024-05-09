@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FriendsService } from '../services/friends.service';
-import { NotesService } from '../services/notes.service';
-import { Friend } from '../models/friend.model';
-import { Note } from '../models/note.model';
+import { FriendsService } from '../../services/friends.service';
+import { NotesService } from '../../services/notes.service';
+import { Friend } from '../../models/friend.model';
+import { Note } from '../../models/note.model';
 
 interface FriendWithNotes {
   friend: Friend;
