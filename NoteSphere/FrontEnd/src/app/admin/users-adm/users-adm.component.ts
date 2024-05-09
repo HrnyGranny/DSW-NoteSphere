@@ -32,6 +32,11 @@ export class UsersAdmComponent implements OnInit {
   }
 
   deleteUser(username: string): void {
+    if (username === this.username) {
+      alert('You can not delete yourself');
+      return;
+    }
+  
     if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
       this.userService.deleteUser(username).subscribe(
         () => {
