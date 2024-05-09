@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Importa R
 import { AppRoutingModule } from './app-routing.module'; // Importa el módulo de enrutamiento
 import { CKEditorModule } from 'ckeditor4-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+
 
 //Components
 import { AppComponent } from './app.component';
@@ -31,7 +31,6 @@ import { AuthGuard } from './services/auth.guard';
     ReactiveFormsModule,  // Añade ReactiveFormsModule a la lista de imports
     CKEditorModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [
     AuthService,

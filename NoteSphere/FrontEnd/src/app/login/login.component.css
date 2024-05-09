@@ -70,6 +70,23 @@ button {
   background-color: #FBB566; /* Naranja para el botón principal */
 }
 
+/* Estilos para el enlace de registro */
+.btn-register {
+  display: inline-block;
+  margin-top: 20px; /* Más espacio sobre el enlace */
+  color: #FBB566; /* Naranja para el enlace de registro */
+  text-decoration: none; /* Elimina el subrayado */
+  font-size: 16px; /* Tamaño de fuente más grande */
+  cursor: pointer;
+  text-align: right; /* Alinea el texto a la derecha */
+  width: 100%;
+}
+
+/* Efecto hover para el enlace de registro */
+.btn-register:hover {
+  text-decoration: underline; /* Subraya el enlace al pasar el mouse */
+}
+
 /* Botón hover efectos */
 button:hover {
   opacity: 0.9;

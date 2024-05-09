@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/users.service';
 import { User } from '../models/user.model';
-import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent {
   passwordMismatchError: boolean = false;
   usernameExistsError: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private toastr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
     this.userForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -38,7 +39,6 @@ export class RegisterComponent {
     this.userService.checkUsernameExists(username).subscribe(
       (exists: boolean) => {
         if (exists) {
-          this.toastr.success('User registered successfully');
           this.usernameExistsError = true;
         } else {
           const newUser: User = {
@@ -49,7 +49,13 @@ export class RegisterComponent {
 
           this.userService.createUser(newUser).subscribe(
             () => {
-              this.toastr.success('User registered successfully');
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'User registered successfully',
+                showConfirmButton: false, // oculta el botón de OK
+                timer: 2000 // cierra la alerta después de 1 segundo
+              });
               this.router.navigate(['login']);
             },
             error => {
