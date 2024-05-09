@@ -9,6 +9,7 @@ import { NotesCreateComponent } from './notes-create/notes-create.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FriendNotesComponent } from './friend-notes/friend-notes.component';
 import { FriendManageComponent } from './friend-manage/friend-manage.component';
+import { NotesEditComponent } from './notes-edit/notes-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'notes/create', component: NotesCreateComponent },
   { path: 'friendship', component: FriendshipComponent },
   { path: 'friendship/friendNotes', component: FriendNotesComponent },
-  { path: 'friendship/friendManage', component: FriendManageComponent }
+  { path: 'friendship/friendManage', component: FriendManageComponent },
+  { path: 'notes/edit/:id', component: NotesEditComponent }
 ];
 
 @NgModule({
@@ -26,7 +28,8 @@ const routes: Routes = [
     FriendshipComponent,
     NotesCreateComponent,
     FriendNotesComponent,
-    FriendManageComponent
+    FriendManageComponent,
+    NotesEditComponent
   ],
   imports: [
     FormsModule,
