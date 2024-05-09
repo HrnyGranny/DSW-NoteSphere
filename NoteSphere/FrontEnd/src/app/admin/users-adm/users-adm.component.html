@@ -1,24 +1,39 @@
 <div class="container">
-  <h2>User List</h2>
-  <button class="btn btn-primary" (click)="navigateToCreateUser()">Crear nuevo usuario</button>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Admin</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.username }}</td>
-        <td>{{ user.password }}</td>
-        <td>{{ user.admin }}</td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteUser(user.username)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="welcome-banner">
+    <span id="username">User List</span>
+  </div>
+
+  <div class="content">
+    <button class="btn btn-primary" (click)="navigateToCreateUser()">New user</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>USERNAME</th>
+          <th>PASSWORD</th>
+          <th>ADMIN</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.username }}</td>
+          <td>{{ user.password }}</td>
+          <td>{{ user.admin }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteUser(user.username)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="logout-banner">
+    <div class="return-button">
+      <button (click)="return()">Return</button>
+    </div>
+    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Exit</button>
+    </div>
+  </div>
 </div>

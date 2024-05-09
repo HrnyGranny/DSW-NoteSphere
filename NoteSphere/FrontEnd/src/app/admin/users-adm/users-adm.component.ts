@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/users.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-list',
@@ -10,11 +11,13 @@ import { Router } from '@angular/router';
 })
 export class UsersAdmComponent implements OnInit {
   users: User[] = [];
+  username: string = '';
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadUsers();
+    this.username = this.authService.getUser();
   }
 
   loadUsers(): void {
@@ -44,5 +47,14 @@ export class UsersAdmComponent implements OnInit {
 
   navigateToCreateUser(): void {
     this.router.navigate(['admin/usersAdm/create']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
+  }
+
+  return(): void {
+    this.router.navigate(['/admin']);
   }
 }

@@ -16,9 +16,12 @@
   </div>
 
   <div class="logout-banner">
+    <div class="return-button">
+      <button (click)="return()">Return</button>
+    </div>
     <span>Welcome again, <span id="username">{{ username }}</span>!</span>
     <div class="logout-button">
-      <button (click)="logout()">Salir</button>
+      <button (click)="logout()">Exit</button>
     </div>
   </div>
 </div>

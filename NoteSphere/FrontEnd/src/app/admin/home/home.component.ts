@@ -29,13 +29,17 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/admin/friendshipAdm']);
   }
 
+  return(): void {
+    this.router.navigate(['/admin']);
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
   }
 
   deleteAccount(): void {
-    if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+    if (confirm('Are you sure you want to delete this user?')) {
       this.userService.deleteUser(this.username).subscribe(
         () => {
           console.log('User deleted successfully');

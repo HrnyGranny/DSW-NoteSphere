@@ -26,6 +26,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/user/friendship']);
   }
 
+  return(): void {
+    this.router.navigate(['/admin']);
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']); // Redirige al usuario al LoginComponent
