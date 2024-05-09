@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotesService } from '../services/notes.service';
 import { Note } from '../models/note.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-notes-edit',
@@ -15,11 +16,13 @@ export class NotesEditComponent implements OnInit {
     content: '',
     owner: '' // Aquí deberías poner el propietario de la nota
   };
+  username: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private notesService: NotesService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +30,7 @@ export class NotesEditComponent implements OnInit {
     if (noteId) {
       this.loadNote(noteId);
     }
+    this.username = this.authService.getUser();
   }
 
   loadNote(noteId: string): void {
@@ -42,5 +46,14 @@ export class NotesEditComponent implements OnInit {
     }, error => {
       console.error('Error al actualizar la nota:', error);
     });
+  }
+
+  return(): void {
+    this.router.navigate(['/admin']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
   }
 }

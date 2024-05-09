@@ -25,24 +25,20 @@
   }
   
   .content {
-    padding-top: 100px; /* Aumentar el padding superior para compensar el espacio del banner fijo */
+    padding-top: 140px; /* Aumentar el padding superior para compensar el espacio del banner fijo */
     padding-bottom: 100px; /* Aumentar el padding inferior para compensar el espacio del logout-banner */
     display: flex;
-    flex-direction: column; /* Cambiado de row a column para la tabla */
-    align-items: center;
-    margin-top: 40px; /* Ajustar según la altura del welcome-banner */
+    margin-top: 0; /* Ajustar según la altura del welcome-banner */
     position: absolute;
     top: 0;
-    left: 0;
+    left: 15px;
     right: 0;
     bottom: 60px;
     box-sizing: border-box;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap; 
-    justify-content: center;
+    justify-content: flex-start;
     gap: 20px;
   }
   
@@ -102,17 +98,17 @@
     background-color: #ffffff; /* Fondo blanco para las notas */
     border: 1px solid #ccc; /* Borde sutil */
     padding: 20px; /* Espaciado interno */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra ligera para resaltar */
-    width: 100%; /* Ajusta el ancho al 100% dentro de su contenedor con un máximo de 350px */
-    max-width: 350px; /* Máximo ancho de las notas */
-    min-height: 100px; /* Altura mínima para consistencia visual */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra ligera para resaltar *//* Ajusta el ancho al 100% dentro de su contenedor con un máximo de 350px */
     display: flex; /* Uso de flex para estructurar el contenido interno */
     flex-direction: column; /* Elementos internos organizados en columna */
+    min-width: 276px;
+    box-sizing: border-box;
   }
   
   .nota h2 {
     margin-top: 0; /* Elimina margen superior para el título */
     color: #333; /* Color del texto */
+    text-align: center;
   }
   
   .nota div[innerHTML] {

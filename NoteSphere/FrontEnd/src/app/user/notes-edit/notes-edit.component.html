@@ -1,4 +1,8 @@
-<div class="note-editor">
+<div class="container">
+  <div class="welcome-banner">
+    <span id="username">Mis Notas</span>
+  </div>
+  <div class="content">
     <!-- Título de la nota -->
     <input type="text" [(ngModel)]="note.title" placeholder="Título de la nota">
   
@@ -25,3 +29,13 @@
     <!-- Botón para guardar la nota -->
     <button (click)="saveNote()">Guardar</button>
   </div>
+  <div class="logout-banner">
+    <div class="return-button">
+      <button (click)="return()">Return</button>
+    </div>
+    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Exit</button>
+    </div>
+  </div>
+</div>

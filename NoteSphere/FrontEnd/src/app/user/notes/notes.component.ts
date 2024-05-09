@@ -90,5 +90,14 @@ export class NotesComponent implements OnInit {
   navigateToCreateNote(): void {
     this.router.navigate(['/user/notes/create']);
   }
+
+  return(): void {
+    this.router.navigate(['/user']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
+  }
 }
 
