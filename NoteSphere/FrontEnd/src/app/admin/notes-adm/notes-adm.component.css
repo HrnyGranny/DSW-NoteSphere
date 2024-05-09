@@ -1,0 +1,138 @@
+.container {
+    margin: 0;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #FDFEEE; /* Color de fondo amarillo claro */
+    height: calc(100vh - 100px); 
+    overflow: hidden;
+  }
+  
+  /* Banner de bienvenida en la barra de navegación */
+  .welcome-banner {
+    background-color: #5E7F88; /* Azul oscuro */
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 36px;
+    font-family: 'Oswald', sans-serif;
+    border-bottom: 5px solid #FBB566; /* Borde naranja */
+    z-index: 10; /* Asegura que siempre esté sobre otros elementos */
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .content {
+    padding-top: 100px; /* Aumentar el padding superior para compensar el espacio del banner fijo */
+    padding-bottom: 100px; /* Aumentar el padding inferior para compensar el espacio del logout-banner */
+    display: flex;
+    flex-direction: column; /* Cambiado de row a column para la tabla */
+    align-items: center;
+    margin-top: 40px; /* Ajustar según la altura del welcome-banner */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .logout-banner {
+    background-color: #5E7F88; /* Azul oscuro */
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.1); /* Sombra hacia arriba */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-top: 5px solid #FBB566; /* Barra divisoria naranja */
+  }
+  
+  .return-button {
+    margin: 0 10px; /* Espaciado a ambos lados para equilibrio */
+  }
+  
+  .return-button button {
+    background-color: #FBB566;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .return-button button:hover {
+    opacity: 0.9;
+  }
+  
+  .logout-button {
+    margin: 0 50px; /* Espaciado a ambos lados para equilibrio */
+  }
+  
+  .logout-button button {
+    background-color: #FBB566;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .logout-button button:hover {
+    opacity: 0.9;
+  }
+
+  .nota {
+    background-color: #ffffff; /* Fondo blanco para las notas */
+    border: 1px solid #ccc; /* Borde sutil */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra ligera para resaltar */
+    width: 100%; /* Ajusta el ancho al 100% dentro de su contenedor con un máximo de 350px */
+    max-width: 350px; /* Máximo ancho de las notas */
+    min-height: 100px; /* Altura mínima para consistencia visual */
+    display: flex; /* Uso de flex para estructurar el contenido interno */
+    flex-direction: column; /* Elementos internos organizados en columna */
+  }
+  
+  .nota h2 {
+    margin-top: 0; /* Elimina margen superior para el título */
+    color: #333; /* Color del texto */
+  }
+  
+  .nota div[innerHTML] {
+    flex-grow: 1; /* Permite que el contenido crezca para llenar el espacio disponible */
+    padding: 10px 0; /* Espaciado alrededor del contenido interno */
+  }
+  
+  .nota button {
+    margin-top: 10px; /* Espaciado encima del botón */
+    width: 100%; /* El botón ocupa todo el ancho */
+    padding: 10px 0; /* Padding vertical para hacerlo más accesible */
+  }
+  
+  .nota button.btn-danger {
+    background-color: #FF6347; /* Rojo para el botón eliminar, igual que en Friendships */
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .nota button:hover {
+    opacity: 0.9; /* Efecto de opacidad al pasar el ratón */
+  }

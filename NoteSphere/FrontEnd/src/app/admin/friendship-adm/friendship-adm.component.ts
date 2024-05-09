@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendsService } from '../services/friends.service';
 import { Friend } from '../models/friend.model';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-friendship-adm',
@@ -9,11 +11,13 @@ import { Friend } from '../models/friend.model';
 })
 export class FriendshipAdmComponent implements OnInit {
   users: { username: string, friends: Friend[] }[] = [];
+  username1: string = '';
 
-  constructor(private friendsService: FriendsService) { }
+  constructor(private authService: AuthService, private friendsService: FriendsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllFriends();
+    this.username1 = this.authService.getUser();
   }
 
   getAllFriends(): void {
@@ -39,4 +43,14 @@ export class FriendshipAdmComponent implements OnInit {
       console.error('friendId is undefined');
     }
   }
+
+  return(): void {
+    this.router.navigate(['/admin']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
+  }
+
 }

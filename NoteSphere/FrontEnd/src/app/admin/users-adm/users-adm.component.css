@@ -1,48 +1,48 @@
 /* Reset básico y estilos generales */
 .container {
-    margin: 0;
-    padding: 0;
-    font-family: 'DM Sans', sans-serif;
-    background-color: #FDFEEE; /* Color de fondo amarillo claro */
-    height: calc(100vh - 100px); 
-    overflow: hidden;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #FDFEEE; /* Color de fondo amarillo claro */
+  height: calc(100vh - 100px); 
+  overflow: hidden;
+}
+
+/* Banner de bienvenida en la barra de navegación */
+.welcome-banner {
+  background-color: #5E7F88; /* Azul oscuro */
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 36px;
+  font-family: 'Oswald', sans-serif;
+  border-bottom: 5px solid #FBB566; /* Borde naranja */
+  z-index: 10; /* Asegura que siempre esté sobre otros elementos */
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
   
-  /* Banner de bienvenida en la barra de navegación */
-  .welcome-banner {
-    background-color: #5E7F88; /* Azul oscuro */
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
-    font-size: 36px;
-    font-family: 'Oswald', sans-serif;
-    border-bottom: 5px solid #FBB566; /* Borde naranja */
-    z-index: 10; /* Asegura que siempre esté sobre otros elementos */
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  
-  .content {
-    padding-top: 100px; /* Aumentar el padding superior para compensar el espacio del banner fijo */
-    padding-bottom: 100px; /* Aumentar el padding inferior para compensar el espacio del logout-banner */
-    display: flex;
-    flex-direction: column; /* Cambiado de row a column para la tabla */
-    align-items: center;
-    margin-top: 40px; /* Ajustar según la altura del welcome-banner */
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 60px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.content {
+  padding-top: 100px; /* Aumentar el padding superior para compensar el espacio del banner fijo */
+  padding-bottom: 100px; /* Aumentar el padding inferior para compensar el espacio del logout-banner */
+  display: flex;
+  flex-direction: column; /* Cambiado de row a column para la tabla */
+  align-items: center;
+  margin-top: 40px; /* Ajustar según la altura del welcome-banner */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
   
 /* Nuevo banner inferior para salida */
 .logout-banner {
@@ -97,8 +97,7 @@
   opacity: 0.9;
 }
 
-/* Botones adicionales con estilos Bootstrap adaptados al tema */
-.btn-primary {
+.btn-primary button {
   background-color: #FBB566;
   color: white;
   padding: 10px 20px;
@@ -109,6 +108,10 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Botones adicionales con estilos Bootstrap adaptados al tema */
+.btn-primary button:hover {
+  opacity: 0.9;
+}
 .btn-danger {
   background-color: #FF6347; /* Color rojo para botones de acción negativa */
   color: white;
@@ -120,28 +123,32 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.btn-danger button:hover {
+  opacity: 0.9;
+}
+
 /* Estilos para la tabla y sus elementos */
 .table {
-    width: 80%; /* Controla el ancho de la tabla */
-    margin: 20px auto; /* Centra la tabla horizontalmente con margen arriba y abajo */
-    background-color: #FFFBE6; /* Un color más claro que el fondo de la aplicación */
-    border: 2px solid black; /* Borde negro para la tabla */
-    border-collapse: collapse; /* Elimina los espacios entre bordes de celdas */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Sombra suave para resaltar la tabla */
-  }
-  
-  .table th, .table td {
-    border: 1px solid black; /* Borde para celdas */
-    padding: 10px; /* Espaciado interno en celdas */
-    text-align: center; /* Alinea el texto al centro en las celdas */
-  }
-  
-  .table th {
-    background-color: #FBB566; /* Fondo de las cabeceras igual al de los botones */
-    color: white; /* Texto blanco para contraste */
-  }
-  
-  .table td {
-    background-color: #f8f8f3;
-  }
+  width: 80%; /* Controla el ancho de la tabla */
+  margin: 20px auto; /* Centra la tabla horizontalmente con margen arriba y abajo */
+  background-color: #FFFBE6; /* Un color más claro que el fondo de la aplicación */
+  border: 2px solid black; /* Borde negro para la tabla */
+  border-collapse: collapse; /* Elimina los espacios entre bordes de celdas */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Sombra suave para resaltar la tabla */
+}
+
+.table th, .table td {
+  border: 1px solid black; /* Borde para celdas */
+  padding: 10px; /* Espaciado interno en celdas */
+  text-align: center; /* Alinea el texto al centro en las celdas */
+}
+
+.table th {
+  background-color: #FBB566; /* Fondo de las cabeceras igual al de los botones */
+  color: white; /* Texto blanco para contraste */
+}
+
+.table td {
+  background-color: #f8f8f3;
+}
   

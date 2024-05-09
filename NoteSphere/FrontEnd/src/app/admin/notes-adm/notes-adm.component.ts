@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../models/note.model';
 import { NotesService } from '../services/notes.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-notas',
@@ -9,11 +11,13 @@ import { NotesService } from '../services/notes.service';
 })
 export class NotesAdmComponent implements OnInit {
   notas: Note[] = [];
+  username: string = '';
 
-  constructor(private notesService: NotesService) { }
+  constructor(private authService: AuthService, private router: Router, private notesService: NotesService) { }
 
   ngOnInit(): void {
     this.obtenerNotas();
+    this.username = this.authService.getUser();
   }
 
   obtenerNotas(): void {
@@ -44,5 +48,14 @@ export class NotesAdmComponent implements OnInit {
         }
       );
     }
+  }
+
+  return(): void {
+    this.router.navigate(['/admin']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
   }
 }

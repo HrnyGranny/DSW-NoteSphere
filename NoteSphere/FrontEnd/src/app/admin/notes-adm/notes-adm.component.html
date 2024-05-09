@@ -1,10 +1,26 @@
-<div *ngFor="let nota of notas">
-    <div class="nota">
-      <h2>{{ nota.title }}</h2>
-      <div [innerHTML]="nota.content"></div>
-      <button (click)="editarNota(nota)">Editar</button>
-      <button class="btn btn-danger" (click)="nota._id && eliminarNota(nota._id)">Eliminar</button>
+<div class="container">
+  <div class="welcome-banner">
+    <span id="username">Friendship List</span>  <!-- Cambiado el texto para reflejar la pestaña actual -->
+  </div>
+  <div class="content">
+    <div *ngFor="let nota of notas">
+      <div class="nota">
+        <h2>{{ nota.title }}</h2>
+        <div [innerHTML]="nota.content"></div>
+        <button (click)="editarNota(nota)">Editar</button>
+        <button class="btn btn-danger" (click)="nota._id && eliminarNota(nota._id)">Eliminar</button>
+      </div>
     </div>
   </div>
+  <div class="logout-banner">
+    <div class="return-button">
+      <button (click)="return()">Return</button>
+    </div>
+    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Exit</button>
+    </div>
+  </div>
+</div>
   
 
