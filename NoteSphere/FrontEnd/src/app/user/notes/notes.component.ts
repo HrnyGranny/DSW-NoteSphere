@@ -61,7 +61,7 @@ export class NotesComponent implements OnInit {
   }
 
   editarNota(nota: Note): void {
-    // Aquí puedes implementar la lógica para editar la nota
+    this.router.navigate(['/user/notes/edit', nota._id]);
   }
 
   compartirNota(nota: Note, usuario: User): void {

@@ -24,13 +24,17 @@ export class NotesService {
   getNotesByOwner(owner: string): Observable<Note[]> {
     return this.http.get<Note[]>(`${this.apiUrl}/owner/${owner}`);
   }
+
+  getNoteById(noteId: string): Observable<Note> {
+    return this.http.get<Note>(`${this.apiUrl}/${noteId}`);
+  }
   
   createNote(newNote: Note): Observable<Note> {
     return this.http.post<Note>(this.apiUrl, newNote);
   }
 
-  updateNote(noteId: string, updatedNote: Note): Observable<Note> {
-    return this.http.patch<Note>(`${this.apiUrl}/${noteId}`, updatedNote);
+  updateNote(updatedNote: Note): Observable<Note> {
+    return this.http.put<Note>(`${this.apiUrl}/${updatedNote._id}`, updatedNote);
   }
 
   deleteNote(noteId: string): Observable<void> {
