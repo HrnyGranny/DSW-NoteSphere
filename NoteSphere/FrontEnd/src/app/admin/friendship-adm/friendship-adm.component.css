@@ -40,7 +40,6 @@
   flex-wrap: wrap; 
   justify-content: flex-start; 
   align-items: flex-start;
-  
 }
 
 .logout-banner {
@@ -143,5 +142,3 @@
 .user-friends-container button:hover {
   opacity: 0.9;
 }
-
-  
