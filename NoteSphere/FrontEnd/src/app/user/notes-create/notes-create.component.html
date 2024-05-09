@@ -4,23 +4,19 @@
 
   <!-- Editor de texto utilizando TinyMCE -->
   <editor
-    [init]="{
-      height: 500,
-      menubar: false,
-      plugins: [
-        'advlist autolink lists link image',
-        'charmap print preview anchor help',
-        'searchreplace visualblocks code',
-        'insertdatetime media table paste wordcount'
-      ],
-      toolbar:
-        'undo redo | formatselect | bold italic | \
-        alignleft aligncenter alignright | \
-        bullist numlist outdent indent | help'
-    }"
-    [(ngModel)]="noteContent"
-    apiKey="r22bw6slpw1ctqhev542lkrhcvd71a4lsxpwb0h3p5uy0l5u"
-  ></editor>
+  [init]="{
+    height: 500,
+    menubar: false,
+    themes: 'modern',
+    plugins: 'advlist autolink lists link image charmap print preview anchor help searchreplace visualblocks code insertdatetime media table paste wordcount',
+    toolbar:
+      'undo redo | formatselect | bold italic | \
+      alignleft aligncenter alignright | \
+      bullist numlist outdent indent | help'
+  }"
+  [(ngModel)]="noteContent"
+  apiKey="r22bw6slpw1ctqhev542lkrhcvd71a4lsxpwb0h3p5uy0l5u"
+></editor>
 
   <!-- Botón para guardar la nota -->
   <button (click)="saveNote()">Guardar</button>
