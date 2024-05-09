@@ -47,7 +47,7 @@ export class NotesComponent implements OnInit {
   }
 
   eliminarNota(id: string): void {
-    if (confirm('¿Estás seguro de que quieres eliminar esta nota?')) {
+    if (confirm('Are you sure you want to delete this note?')) {
       this.notesService.deleteNote(id).subscribe(
         () => {
           // Eliminar la nota de la lista local de notas
@@ -66,7 +66,7 @@ export class NotesComponent implements OnInit {
 
   compartirNota(nota: Note, usuario: User): void {
     if (usuario.username === this.username) {
-      alert('No puedes compartir una nota contigo mismo.');
+      alert('You cannot share a note with yourself.');
       return;
     }
   
@@ -74,7 +74,7 @@ export class NotesComponent implements OnInit {
       notasUsuario => {
         const notaExistente = notasUsuario.find(n => n.title === nota.title && n.content === nota.content);
         if (notaExistente) {
-          alert('El usuario ya tiene esta nota.');
+          alert('The user already has this note.');
         } else {
           const nuevaNota = { ...nota, owner: usuario.username };
           this.notesService.createNote(nuevaNota).subscribe(

@@ -7,13 +7,15 @@ import { UsersAdmComponent } from './users-adm/users-adm.component';
 import { FriendshipAdmComponent } from './friendship-adm/friendship-adm.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsersEditComponent } from './users-edit/users-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'notesAdm', component: NotesAdmComponent },
   { path: 'usersAdm', component: UsersAdmComponent },
   { path: 'usersAdm/create', component: UserCreateComponent},
-  { path: 'friendshipAdm', component: FriendshipAdmComponent }
+  { path: 'friendshipAdm', component: FriendshipAdmComponent },
+  { path: 'usersAdm/edit/:username', component: UsersEditComponent }
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ const routes: Routes = [
     NotesAdmComponent,
     UsersAdmComponent,
     FriendshipAdmComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    UsersEditComponent
   ],
   imports: [
     CommonModule,

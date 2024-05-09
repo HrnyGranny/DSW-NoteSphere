@@ -28,7 +28,7 @@ export class FriendsService {
     return this.http.post<Friend>(this.apiUrl, newFriend);
   }
 
-  deleteFriendByUsername(username: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/username/${username}`);
+  deleteFriendByUsername(username: string, friend: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/username/${username}/friend/${friend}`);
   }
 }

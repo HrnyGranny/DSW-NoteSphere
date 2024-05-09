@@ -54,6 +54,10 @@ export class UsersAdmComponent implements OnInit {
     this.router.navigate(['admin/usersAdm/create']);
   }
 
+  navigateToEditUser(username: string): void {
+    this.router.navigate(['admin/usersAdm/edit', username]);
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
