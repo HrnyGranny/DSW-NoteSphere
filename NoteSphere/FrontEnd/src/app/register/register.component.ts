@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/users.service';
 import { User } from '../models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent {
   passwordMismatchError: boolean = false;
   usernameExistsError: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private toastr: ToastrService) {
     this.userForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -37,6 +38,7 @@ export class RegisterComponent {
     this.userService.checkUsernameExists(username).subscribe(
       (exists: boolean) => {
         if (exists) {
+          this.toastr.success('User registered successfully');
           this.usernameExistsError = true;
         } else {
           const newUser: User = {
@@ -47,7 +49,7 @@ export class RegisterComponent {
 
           this.userService.createUser(newUser).subscribe(
             () => {
-              console.log('Usuario registrado correctamente.');
+              this.toastr.success('User registered successfully');
               this.router.navigate(['login']);
             },
             error => {
