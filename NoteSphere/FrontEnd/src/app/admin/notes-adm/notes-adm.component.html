@@ -7,7 +7,6 @@
       <div class="nota">
         <h2>{{ nota.title }}</h2>
         <div [innerHTML]="nota.content"></div>
-        <button (click)="editarNota(nota)">Editar</button>
         <button class="btn btn-danger" (click)="nota._id && eliminarNota(nota._id)">Eliminar</button>
       </div>
     </div>
@@ -16,7 +15,7 @@
     <div class="return-button">
       <button (click)="return()">Return</button>
     </div>
-    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <span>Hi, <span id="username">{{ username }}</span>!</span>
     <div class="logout-button">
       <button (click)="logout()">Exit</button>
     </div>

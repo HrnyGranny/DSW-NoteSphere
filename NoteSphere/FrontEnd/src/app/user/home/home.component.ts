@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-home',
@@ -36,17 +37,38 @@ export class HomeComponent implements OnInit {
   }
 
   deleteAccount(): void {
-    if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
-      this.userService.deleteUser(this.username).subscribe(
-        () => {
-          console.log('User deleted successfully');
-          // Aquí puedes manejar la respuesta del servidor, por ejemplo, redirigir al usuario a la página de inicio de sesión
-        },
-        error => {
-          console.error(error);
-          // Aquí puedes manejar los errores, por ejemplo, mostrar un mensaje de error al usuario
-        }
-      );
-    }
+    Swal.fire({
+      title: 'Are you sure you want to delete this account?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(this.username).subscribe(
+          () => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Account deleted successfully',
+              timer: 2000,
+              showConfirmButton: false 
+            });
+            this.authService.logout();
+            this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
+          },
+          error => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error deleting the account',
+              timer: 2000, 
+              showConfirmButton: false 
+            });
+            // Here you can handle errors, for example, show an error message to the user
+          }
+        );
+      }
+    });
   }
 }

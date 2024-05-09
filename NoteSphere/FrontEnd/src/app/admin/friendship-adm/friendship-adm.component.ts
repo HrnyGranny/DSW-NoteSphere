@@ -3,6 +3,7 @@ import { FriendsService } from '../../services/friends.service';
 import { Friend } from '../../models/friend.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-friendship-adm',
@@ -35,12 +36,45 @@ export class FriendshipAdmComponent implements OnInit {
   }
 
   deleteFriend(username: string, friend: string): void {
-    // Eliminar la amistad del usuario seleccionado al amigo
-    this.friendsService.deleteFriendByUsername(username, friend).subscribe(() => {
-      // Eliminar la amistad del amigo al usuario seleccionado
-      this.friendsService.deleteFriendByUsername(friend, username).subscribe(() => {
-        this.getAllFriends(); // Actualiza la lista de amigos después de eliminar un amigo
-      });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.friendsService.deleteFriendByUsername(username, friend).subscribe(() => {
+          this.friendsService.deleteFriendByUsername(friend, username).subscribe(() => {
+            this.getAllFriends();
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Friendship has been deleted.',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          }, error => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Error deleting friendship.',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          });
+        }, error => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error deleting friendship.',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        });
+      }
     });
   }
 

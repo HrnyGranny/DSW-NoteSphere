@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/users.service';
 import { User } from '../../models/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-create',
@@ -45,20 +46,37 @@ export class UserCreateComponent {
             password,
             admin: admin ? 'Y' : 'N'
           };
-
+  
           this.userService.createUser(newUser).subscribe(
             () => {
-              console.log('Usuario creado correctamente.');
+              Swal.fire({
+                title: 'User created successfully.',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+              });
               this.router.navigate(['admin/usersAdm']);
             },
             error => {
-              console.error('Error al crear usuario:', error);
+              Swal.fire({
+                title: 'Error creating user.',
+                text: error.message,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
             }
           );
         }
       },
       error => {
-        console.error('Error al verificar el nombre de usuario:', error);
+        Swal.fire({
+          title: 'Error checking username.',
+          text: error.message,
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     );
   }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/users.service';
 import { User } from '../../models/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users-edit',
@@ -33,7 +34,11 @@ export class UsersEditComponent implements OnInit {
     if (username) {
       this.userService.getUserByUsername(username).subscribe(user => {
         this.user = user;
-        this.userForm.patchValue(user);
+        this.userForm.patchValue({
+          ...user,
+          confirmPassword: user.password,
+          admin: user.admin === 'Y'
+        });
       });
     }
   }
@@ -42,27 +47,38 @@ export class UsersEditComponent implements OnInit {
     if (this.userForm.invalid) {
       return;
     }
-
+  
     const { username, password, confirmPassword, admin } = this.userForm.value;
-
+  
     if (password !== confirmPassword) {
       this.passwordMismatchError = true;
       return;
     }
-
+  
     const updatedUser: User = {
       username,
       password,
       admin: admin ? 'Y' : 'N'
     };
-
+  
     this.userService.updateUser(this.user.username, updatedUser).subscribe(
       () => {
-        console.log('Usuario actualizado correctamente.');
+        Swal.fire({
+          title: 'User updated successfully.',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         this.router.navigate(['admin/usersAdm']);
       },
       error => {
-        console.error('Error al actualizar usuario:', error);
+        Swal.fire({
+          title: 'Error updating user.',
+          text: error.message,
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     );
   }

@@ -101,6 +101,15 @@
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-right: 20px;
+}
+
+.logout-button button:last-child {
+  margin-right: 0; /* Elimina el margen del último botón para evitar un espacio extra a la derecha */
+}
+
+.logout-button .delete-account-button {
+  background-color: #FF6347;
 }
 
 .logout-button button:hover {

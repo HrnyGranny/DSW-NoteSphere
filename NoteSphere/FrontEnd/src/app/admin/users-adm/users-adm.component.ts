@@ -3,6 +3,7 @@ import { UserService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-list',
@@ -33,21 +34,48 @@ export class UsersAdmComponent implements OnInit {
 
   deleteUser(username: string): void {
     if (username === this.username) {
-      alert('You can not delete yourself');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You cannot delete yourself',
+        timer: 2000, 
+        showConfirmButton: false 
+      });
       return;
     }
   
-    if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
-      this.userService.deleteUser(username).subscribe(
-        () => {
-          // Eliminar el usuario de la lista local de usuarios
-          this.users = this.users.filter(u => u.username !== username);
-        },
-        error => {
-          console.error('Error al eliminar el usuario:', error);
-        }
-      );
-    }
+    Swal.fire({
+      title: 'Are you sure you want to delete this user?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(username).subscribe(
+          () => {
+            // Remove the user from the local users list
+            this.users = this.users.filter(u => u.username !== username);
+            Swal.fire({
+              icon: 'success',
+              title: 'User deleted successfully',
+              timer: 2000, 
+              showConfirmButton: false 
+            });
+          },
+          error => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error deleting the user',
+              timer: 2000, 
+              showConfirmButton: false 
+            });
+          }
+        );
+      }
+    });
   }
 
   navigateToCreateUser(): void {

@@ -3,6 +3,8 @@ import { Note } from '../../models/note.model';
 import { NotesService } from '../../services/notes.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-notas',
@@ -30,24 +32,40 @@ export class NotesAdmComponent implements OnInit {
       }
     );
   }
-
-  editarNota(nota: Note): void {
-    // Aquí puedes implementar la lógica para editar una nota
-    console.log('Editar nota:', nota);
-  }
-
+  
   eliminarNota(id: string): void {
-    if (confirm('¿Estás seguro de que quieres eliminar esta nota?')) {
-      this.notesService.deleteNote(id).subscribe(
-        () => {
-          // Eliminar la nota de la lista local de notas
-          this.notas = this.notas.filter(nota => nota._id !== id);
-        },
-        error => {
-          console.error('Error al eliminar la nota:', error);
-        }
-      );
-    }
+    Swal.fire({
+      title: 'Are you sure you want to delete this note?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.notesService.deleteNote(id).subscribe(
+          () => {
+            this.notas = this.notas.filter(nota => nota._id !== id);
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'The note has been deleted.',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          },
+          error => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'There was an error deleting the note.',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          }
+        );
+      }
+    });
   }
 
   return(): void {
