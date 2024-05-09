@@ -6,6 +6,11 @@
   height: 100vh;
   background-color: #5E7F88; /* Azul para el fondo de la aplicación */
   font-family: 'DM Sans', sans-serif; /* Fuente general */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 /* Estilo del formulario */
@@ -53,11 +58,12 @@ button {
   width: 100%;
   padding: 15px; /* Padding más grande */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   color: white;
   cursor: pointer;
   font-size: 16px; /* Tamaño de fuente más grande */
   margin-top: 20px; /* Más espacio sobre el botón */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .btn-login {

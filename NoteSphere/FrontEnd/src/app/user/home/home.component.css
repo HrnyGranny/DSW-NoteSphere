@@ -88,7 +88,7 @@
 }
 
 .return-button button:hover {
-  background-color: #F8C183; /* Cambia el color de fondo al pasar el ratón */
+  opacity: 0.9;
 }
 
 .logout-button {
@@ -105,9 +105,9 @@
 }
 
 .logout-button button:hover {
-  background-color: #F8C183; /* Cambia el color de fondo al pasar el ratón */
+  opacity: 0.9;
 }
 
 .main-action-button button:hover {
-  background-color: #F8C183; /* Cambia el color de fondo al pasar el ratón */
+  opacity: 0.9;
 }
