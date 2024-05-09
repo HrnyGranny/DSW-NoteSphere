@@ -1,4 +1,9 @@
-# DSW-NoteSphere
+<p align="center">
+  <img src="https://github.com/HrnyGranny/DSW-NoteSphere/assets/91948162/112e26c4-5e1a-408a-85a3-525c64b82182" alt="NoteSphere">
+</p>
+
+# NoteSphere
+
 Web application with Angular + NodeJS + Express in which we are going to implement a web system for managing notes, thoughts, lists, task reminders, etc. 
 
 ## Authors
@@ -7,11 +12,15 @@ Web application with Angular + NodeJS + Express in which we are going to impleme
 
 Carlos Ordoño Moraleda
 
-## Install 
+## Web Page
+
+## Install (local)
 
 npm install (in backend folder)
 
-## Execute
+* Delete node_modules and then try npm install again
+
+## Execute (local)
 
 BackEnd: npm start (port 3000)
 
