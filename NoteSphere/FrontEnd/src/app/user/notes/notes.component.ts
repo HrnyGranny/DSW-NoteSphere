@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-notas',
@@ -30,7 +31,12 @@ export class NotesComponent implements OnInit {
         this.notas = notas;
       },
       error => {
-        console.error('Error al obtener las notas:', error);
+        Swal.fire({
+          title: 'Error getting the notes',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     );
   }
@@ -41,23 +47,49 @@ export class NotesComponent implements OnInit {
         this.usuarios = usuarios;
       },
       error => {
-        console.error('Error al obtener los usuarios:', error);
+        Swal.fire({
+          title: 'Error getting the users',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     );
   }
 
   eliminarNota(id: string): void {
-    if (confirm('Are you sure you want to delete this note?')) {
-      this.notesService.deleteNote(id).subscribe(
-        () => {
-          // Eliminar la nota de la lista local de notas
-          this.notas = this.notas.filter(nota => nota._id !== id);
-        },
-        error => {
-          console.error('Error al eliminar la nota:', error);
-        }
-      );
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.notesService.deleteNote(id).subscribe(
+          () => {
+            // Remove the note from the local list of notes
+            this.notas = this.notas.filter(nota => nota._id !== id);
+            Swal.fire({
+              title: 'Note successfully deleted.',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          },
+          error => {
+            Swal.fire({
+              title: 'Error deleting the note',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          }
+        );
+      }
+    });
   }
 
   editarNota(nota: Note): void {
@@ -66,7 +98,12 @@ export class NotesComponent implements OnInit {
 
   compartirNota(nota: Note, usuario: User): void {
     if (usuario.username === this.username) {
-      alert('You cannot share a note with yourself.');
+      Swal.fire({
+        title: 'You cannot share a note with yourself.',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
       return;
     }
   
@@ -74,16 +111,42 @@ export class NotesComponent implements OnInit {
       notasUsuario => {
         const notaExistente = notasUsuario.find(n => n.title === nota.title && n.content === nota.content);
         if (notaExistente) {
-          alert('The user already has this note.');
+          Swal.fire({
+            title: 'The user already has this note.',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+          });
         } else {
           const nuevaNota = { ...nota, owner: usuario.username };
           this.notesService.createNote(nuevaNota).subscribe(
-            () => console.log('Nota compartida con éxito'),
-            error => console.error(error)
+            () => {
+              Swal.fire({
+                title: 'Note successfully shared.',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            },
+            error => {
+              Swal.fire({
+                title: 'Error sharing the note',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
           );
         }
       },
-      error => console.error(error)
+      error => {
+        Swal.fire({
+          title: 'Error sharing the note',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }
     );
   }
 
@@ -97,7 +160,6 @@ export class NotesComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
+    this.router.navigate(['/login']);  // Redirects the user to the LoginComponent
   }
 }
-

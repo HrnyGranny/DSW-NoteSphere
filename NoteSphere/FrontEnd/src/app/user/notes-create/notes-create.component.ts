@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { NotesService } from '../../services/notes.service';
 import { Note } from '../../models/note.model';
 import { v4 as uuidv4 } from 'uuid'; // Importa la función uuidv4 de la biblioteca uuid
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-note-create',
@@ -23,7 +24,6 @@ export class NotesCreateComponent {
   saveNote(): void {
     // Obtén el propietario del usuario actual del AuthService
     const owner = this.authService.getUser();
-    console.log('Propietario de la nota:', owner);
 
     // Crea una nueva instancia de la nota con los datos del formulario
     const newNote: Note = {
@@ -35,15 +35,21 @@ export class NotesCreateComponent {
 
     // Llama al servicio para guardar la nueva nota
     this.notesService.createNote(newNote).subscribe(() => {
-      console.log('Nota creada con éxito');
+      Swal.fire({
+        title: 'Note successfully created.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000
+      });
       // Redirige a la página de notas después de crear la nota
       this.router.navigate(['/user/notes']);
     }, error => {
-      console.error('Error al crear la nota:', error);
-      // Aquí puedes agregar lógica para manejar el error, como mostrar un mensaje al usuario
+      Swal.fire({
+        title: 'Error creating the note',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
     });
   }
 }
-
-
-

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/users.service';
 import { FriendsService } from '../../services/friends.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-friend-manage',
@@ -28,38 +29,72 @@ export class FriendManageComponent implements OnInit {
 
   addFriend(): void {
     if (this.searchUser === this.username) {
-      alert('No puedes hacerte amigo de ti mismo.');
+      Swal.fire({
+        title: 'You cannot befriend yourself.',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
       return;
     }
   
     this.userService.checkUsernameExists(this.searchUser).subscribe(exists => {
       if (exists) {
-        // Crear la amistad del usuario actual al amigo
+        // Create the friendship from the current user to the friend
         this.friendsService.createFriend({
           username: this.username, friend: this.searchUser,
           _id: ''
         }).subscribe(() => {
-          // Crear la amistad del amigo al usuario actual
+          // Create the friendship from the friend to the current user
           this.friendsService.createFriend({
             username: this.searchUser, friend: this.username,
             _id: ''
           }).subscribe(() => {
             this.loadFriends();
+            Swal.fire({
+              title: 'Friendship successfully created.',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2000
+            });
           });
         });
       } else {
-        alert('El usuario no existe');
+        Swal.fire({
+          title: 'User does not exist',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     });
   }
 
   deleteFriend(friend: string): void {
-    // Eliminar la amistad del usuario actual al amigo
-    this.friendsService.deleteFriendByUsername(this.username, friend).subscribe(() => {
-        // Eliminar la amistad del amigo al usuario actual
-        this.friendsService.deleteFriendByUsername(friend, this.username).subscribe(() => {
-            this.loadFriends();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Delete the friendship from the current user to the friend
+        this.friendsService.deleteFriendByUsername(this.username, friend).subscribe(() => {
+            // Delete the friendship from the friend to the current user
+            this.friendsService.deleteFriendByUsername(friend, this.username).subscribe(() => {
+                this.loadFriends();
+                Swal.fire({
+                  title: 'Friendship successfully deleted.',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 2000
+                });
+            });
         });
+      }
     });
-}
+  }
 }

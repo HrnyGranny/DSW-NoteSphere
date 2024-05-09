@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NotesService } from '../../services/notes.service';
 import { Note } from '../../models/note.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-notes-edit',
@@ -36,15 +37,32 @@ export class NotesEditComponent implements OnInit {
   loadNote(noteId: string): void {
     this.notesService.getNoteById(noteId).subscribe(note => {
       this.note = note;
+    }, error => {
+      Swal.fire({
+        title: 'Error loading the note',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
     });
   }
 
   saveNote(): void {
     this.notesService.updateNote(this.note).subscribe(() => {
-      console.log('Nota actualizada con éxito');
+      Swal.fire({
+        title: 'Note successfully updated.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.router.navigate(['/user/notes']);
     }, error => {
-      console.error('Error al actualizar la nota:', error);
+      Swal.fire({
+        title: 'Error updating the note',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
     });
   }
 

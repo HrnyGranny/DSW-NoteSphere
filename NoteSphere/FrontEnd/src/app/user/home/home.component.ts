@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
-    console.log('Propietario de la nota:', this.username);
   }
 
   notes(): void {
