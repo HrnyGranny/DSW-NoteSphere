@@ -4,7 +4,7 @@
   </div>
   <div class="content">
     <!-- Título de la nota -->
-    <input type="text" [(ngModel)]="note.title" placeholder="Título de la nota">
+    <input class="input" type="text" [(ngModel)]="note.title" placeholder="Título de la nota">
   
     <!-- Editor de texto utilizando TinyMCE -->
     <editor
@@ -27,7 +27,7 @@
     ></editor>
   
     <!-- Botón para guardar la nota -->
-    <button (click)="saveNote()">Guardar</button>
+    <button class="button" (click)="saveNote()">Guardar</button>
   </div>
   <div class="logout-banner">
     <div class="return-button">

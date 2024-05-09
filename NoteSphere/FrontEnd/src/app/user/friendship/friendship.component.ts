@@ -24,4 +24,13 @@ export class FriendshipComponent implements OnInit {
   friendNotes(): void {
     this.router.navigate(['/user/friendship/friendNotes']);
   }
+
+  return(): void {
+    this.router.navigate(['/user']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirects the user to the LoginComponent
+  }
 }

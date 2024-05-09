@@ -1,7 +1,27 @@
-<div *ngFor="let friendWithNotes of friendsWithNotes">
-    <h2>{{ friendWithNotes.friend.friend }}</h2>
-    <div *ngFor="let note of friendWithNotes.notes">
-      <h3>{{ note.title }}</h3>
-      <div [innerHTML]="note.content"></div>
+<div class="container">
+  <div class="welcome-banner">
+    <span id="username">Friendship List</span>
+  </div>
+  <div class="content">
+    <!-- Iterate over each friend with their associated notes -->
+    <div *ngFor="let friendWithNotes of friendsWithNotes" class="friend-with-notes">
+      <h2>{{ friendWithNotes.friend.friend }}</h2>
+      <div class="notes-container">
+        <!-- Iterate over each note shared by the friend -->
+        <div *ngFor="let note of friendWithNotes.notes" class="note">
+          <h3>{{ note.title }}</h3>
+          <div [innerHTML]="note.content"></div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="logout-banner">
+    <div class="return-button">
+      <button (click)="return()">Return</button>
+    </div>
+    <span>Hi, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Exit</button>
+    </div>
+  </div>
+</div>

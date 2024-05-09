@@ -39,7 +39,6 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .logout-banner {
@@ -93,4 +92,29 @@
 
 .logout-button button:hover {
   opacity: 0.9;
+}
+
+button {
+  background-color: #FBB566;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+input[type="text"] {
+  width: 60%; /* Menor ancho para un mejor control */
+  padding: 8px 12px;
+  font-size: 16px; /* Tamaño de fuente reducido */
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra más sutil */
 }

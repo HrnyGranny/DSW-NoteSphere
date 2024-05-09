@@ -1,27 +1,42 @@
-<div class="note-editor">
-  <!-- Título de la nota -->
-  <input type="text" [(ngModel)]="noteTitle" placeholder="Título de la nota">
+<div class="container">
+  <div class="welcome-banner">
+    <span id="username">Notes</span>
+  </div>
+  <div class="content">
+    <div class="note-editor">
+      <!-- Título de la nota -->
+      <input type="text" [(ngModel)]="noteTitle" placeholder="Título de la nota">
 
-  <!-- Editor de texto utilizando TinyMCE -->
-  <editor
-    [init]="{
-      height: 500,
-      menubar: false,
-      plugins: [
-        'advlist autolink lists link image',
-        'charmap print preview anchor help',
-        'searchreplace visualblocks code',
-        'insertdatetime media table paste wordcount'
-      ],
-      toolbar:
-        'undo redo | formatselect | bold italic | \
-        alignleft aligncenter alignright | \
-        bullist numlist outdent indent | help'
-    }"
-    [(ngModel)]="noteContent"
-    apiKey="r22bw6slpw1ctqhev542lkrhcvd71a4lsxpwb0h3p5uy0l5u"
-  ></editor>
+      <!-- Editor de texto utilizando TinyMCE -->
+      <editor
+        [init]="{
+          height: 500,
+          menubar: false,
+          plugins: [
+            'advlist autolink lists link image',
+            'charmap print preview anchor help',
+            'searchreplace visualblocks code',
+            'insertdatetime media table paste wordcount'
+          ],
+          toolbar:
+            'undo redo | formatselect | bold italic | \
+            alignleft aligncenter alignright | \
+            bullist numlist outdent indent | help'
+        }"
+        [(ngModel)]="noteContent"
+        apiKey="r22bw6slpw1ctqhev542lkrhcvd71a4lsxpwb0h3p5uy0l5u"
+      ></editor>
 
-  <!-- Botón para guardar la nota -->
-  <button (click)="saveNote()">Guardar</button>
+      <!-- Botón para guardar la nota -->
+      <button (click)="saveNote()">Guardar</button>
+    </div>
+  <div class="logout-banner">
+    <div class="return-button">
+      <button (click)="return()">Return</button>
+    </div>
+    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Exit</button>
+    </div>
+  </div>
 </div>

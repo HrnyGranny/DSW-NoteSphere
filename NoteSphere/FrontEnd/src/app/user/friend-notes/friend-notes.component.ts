@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { FriendsService } from '../../services/friends.service';
 import { NotesService } from '../../services/notes.service';
 import { Friend } from '../../models/friend.model';
+import { Router } from '@angular/router';
 import { Note } from '../../models/note.model';
 
 interface FriendWithNotes {
@@ -18,15 +19,18 @@ interface FriendWithNotes {
 export class FriendNotesComponent implements OnInit {
   user: string = '';
   friendsWithNotes: FriendWithNotes[] = [];
+  username: string = '';
 
   constructor(
     private authService: AuthService,
     private friendsService: FriendsService,
-    private notesService: NotesService
+    private notesService: NotesService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
+    this.username = this.authService.getUser();
     this.loadFriendsWithNotes();
   }
 
@@ -38,5 +42,14 @@ export class FriendNotesComponent implements OnInit {
         });
       });
     });
+  }
+
+  return(): void {
+    this.router.navigate(['/user/friendship']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
   }
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NotesService } from '../../services/notes.service';
 import { Note } from '../../models/note.model';
+import { User } from '../../models/user.model';
 import { v4 as uuidv4 } from 'uuid'; // Importa la función uuidv4 de la biblioteca uuid
 import Swal from 'sweetalert2';
 
@@ -14,12 +15,17 @@ import Swal from 'sweetalert2';
 export class NotesCreateComponent {
   noteTitle: string = ''; // Variable para almacenar el título de la nota
   noteContent: string = ''; // Variable para almacenar el contenido de la nota
+  username: string = '';
 
   constructor(
     private authService: AuthService,
     private notesService: NotesService,
     private router: Router
   ) { }
+
+  ngOnInit(): void {
+    this.username = this.authService.getUser();
+  }
 
   saveNote(): void {
     // Obtén el propietario del usuario actual del AuthService
@@ -51,5 +57,14 @@ export class NotesCreateComponent {
         timer: 2000
       });
     });
+  }
+  
+  return(): void {
+    this.router.navigate(['/user/notes']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirects the user to the LoginComponent
   }
 }

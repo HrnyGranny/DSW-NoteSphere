@@ -67,7 +67,7 @@ export class NotesEditComponent implements OnInit {
   }
 
   return(): void {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/user/notes']);
   }
 
   logout(): void {

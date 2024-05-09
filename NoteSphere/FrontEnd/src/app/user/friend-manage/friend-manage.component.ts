@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/users.service';
 import { FriendsService } from '../../services/friends.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,13 +12,15 @@ import Swal from 'sweetalert2';
 })
 export class FriendManageComponent implements OnInit {
   username: string = '';
+  username1: string = '';
   searchUser: string = '';
   friends: string[] = [];
 
-  constructor(private authService: AuthService, private userService: UserService, private friendsService: FriendsService) { }
+  constructor(private authService: AuthService, private userService: UserService, private friendsService: FriendsService, private router: Router) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
+    this.username1 = this.authService.getUser();
     this.loadFriends();
   }
 
@@ -96,5 +99,13 @@ export class FriendManageComponent implements OnInit {
         });
       }
     });
+  }
+  return(): void {
+    this.router.navigate(['/user/friendship']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);  // Redirige al usuario al LoginComponent
   }
 }

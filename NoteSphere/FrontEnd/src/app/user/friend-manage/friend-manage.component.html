@@ -1,13 +1,26 @@
 <div class="container">
-  <h1>Gestionar amigos</h1>
-  <input [(ngModel)]="searchUser" placeholder="Buscar usuario">
-  <button (click)="addFriend()">Agregar amigo</button>
-  <hr>
-  <h2>Mis amigos</h2>
-  <ul>
-    <li *ngFor="let friend of friends">
-      {{friend}}
-      <button (click)="deleteFriend(friend)">Eliminar amigo</button>
-    </li>
-  </ul>
+  <div class="welcome-banner">
+    <span id="username">Manage Friends</span>
+  </div>
+  <div class="content">
+    <input [(ngModel)]="searchUser" placeholder="Buscar usuario">
+    <button (click)="addFriend()">Agregar amigo</button>
+    <hr>
+    <h2>Mis amigos</h2>
+    <ul>
+      <li *ngFor="let friend of friends">
+        {{friend}}
+        <button (click)="deleteFriend(friend)">Eliminar amigo</button>
+      </li>
+    </ul>
+  </div>
+  <div class="logout-banner">
+    <div class="return-button">
+      <button (click)="return()">Return</button>
+    </div>
+    <span>Hi, <span id="username">{{ username }}</span>!</span>
+    <div class="logout-button">
+      <button (click)="logout()">Exit</button>
+    </div>
+  </div>
 </div>
