@@ -120,7 +120,7 @@ export class NotesComponent implements OnInit {
             timer: 2000
           });
         } else {
-          const nuevaNota = { ...nota, owner: amigo.username };
+          const nuevaNota = { ...nota, owner: amigo.friend };
           this.notesService.createNote(nuevaNota).subscribe(
             () => {
               Swal.fire({
