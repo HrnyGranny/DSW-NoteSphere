@@ -5,7 +5,9 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/users.service';
+import { FriendsService } from '../../services/friends.service';
 import Swal from 'sweetalert2';
+import { Friend } from '../../models/friend.model';
 
 @Component({
   selector: 'app-notas',
@@ -14,10 +16,10 @@ import Swal from 'sweetalert2';
 })
 export class NotesComponent implements OnInit {
   notas: Note[] = [];
-  usuarios: User[] = [];
+  amigos: Friend[] = [];
   username: string = '';
 
-  constructor(private notesService: NotesService, private authService: AuthService, private router: Router, private userService: UserService) { }
+  constructor(private notesService: NotesService, private authService: AuthService, private router: Router, private userService: UserService, private friendsService : FriendsService) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
@@ -42,13 +44,13 @@ export class NotesComponent implements OnInit {
   }
 
   obtenerUsuarios(): void {
-    this.userService.getAllUsers().subscribe(
-      usuarios => {
-        this.usuarios = usuarios;
+    this.friendsService.getFriendsByUsername(this.username).subscribe(
+      amigos => {
+        this.amigos = amigos; // Asegúrate de que 'usuarios' sea de tipo 'Friend[]'
       },
       error => {
         Swal.fire({
-          title: 'Error getting the users',
+          title: 'Error al obtener los amigos',
           icon: 'error',
           showConfirmButton: false,
           timer: 2000
@@ -96,8 +98,8 @@ export class NotesComponent implements OnInit {
     this.router.navigate(['/user/notes/edit', nota._id]);
   }
 
-  compartirNota(nota: Note, usuario: User): void {
-    if (usuario.username === this.username) {
+  compartirNota(nota: Note, amigo: Friend): void {
+    if (amigo.friend === this.username) {
       Swal.fire({
         title: 'You cannot share a note with yourself.',
         icon: 'error',
@@ -107,18 +109,18 @@ export class NotesComponent implements OnInit {
       return;
     }
   
-    this.notesService.getNotesByOwner(usuario.username).subscribe(
-      notasUsuario => {
-        const notaExistente = notasUsuario.find(n => n.title === nota.title && n.content === nota.content);
+    this.notesService.getNotesByOwner(amigo.friend).subscribe(
+      notasAmigo => {
+        const notaExistente = notasAmigo.find(n => n.title === nota.title && n.content === nota.content);
         if (notaExistente) {
           Swal.fire({
-            title: 'The user already has this note.',
+            title: 'The friend already has this note.',
             icon: 'error',
             showConfirmButton: false,
             timer: 2000
           });
         } else {
-          const nuevaNota = { ...nota, owner: usuario.username };
+          const nuevaNota = { ...nota, owner: amigo.username };
           this.notesService.createNote(nuevaNota).subscribe(
             () => {
               Swal.fire({

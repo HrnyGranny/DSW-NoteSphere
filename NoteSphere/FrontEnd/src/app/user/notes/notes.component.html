@@ -15,7 +15,7 @@
             Share
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" *ngFor="let usuario of usuarios" (click)="compartirNota(nota, usuario)">{{ usuario.username }}</a>
+            <a class="dropdown-item" *ngFor="let amigo of amigos" (click)="compartirNota(nota, amigo)">{{ amigo.friend }}</a>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
     <div class="return-button">
       <button (click)="return()">Return</button>
     </div>
-    <span>Welcome again, <span id="username">{{ username }}</span>!</span>
+    <span>Hi, <span id="username">{{ username }}</span>!</span>
     <div class="logout-button">
       <button (click)="logout()">Exit</button>
     </div>
