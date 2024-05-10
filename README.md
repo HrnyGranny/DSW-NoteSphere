@@ -37,7 +37,21 @@ npm install (in backend folder)
 
 BackEnd: npm start (port 3000)
 
+
 FrontEnd: ng serve (port 4200)
+
+________________________________________________
+
+## User
+
+user: Pepito27
+pass: pepitoelmejor
+
+# Admin
+
+user: admin
+pass: admin
+
 
 
 
