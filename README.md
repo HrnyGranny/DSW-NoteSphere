@@ -14,6 +14,19 @@ Carlos Ordoño Moraleda
 
 ## Web Page
 
+### For Windows (.bat):
+
+#### Execution:
+- Double-click on the `Execute_win.bat` file to execute it.
+- Alternatively, open it from the command line using `cmd` and then type the file name followed by Enter.
+
+### For Linux (.sh):
+
+#### Execution:
+- Open a terminal and navigate to the directory where the `Execute_linux.sh` file is located.
+- Give execute permissions to the file if it doesn't have them yet by running `chmod +x Execute_linux.sh`.
+- Execute the file by typing `./Execute_linux.sh` in the terminal and pressing Enter.
+
 ## Install (local)
 
 npm install (in backend folder)
