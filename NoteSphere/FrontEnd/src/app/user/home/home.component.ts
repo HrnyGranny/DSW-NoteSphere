@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
     this.requestsService.getRequests(this.username).subscribe(
       requests => {
-        this.handleFriendRequests(requests);
+        this.handleFriendRequests(this.removeDuplicateRequests(requests));
       },
       error => {
         console.error('Error getting requests:', error);
@@ -52,6 +52,20 @@ export class HomeComponent implements OnInit {
       // If the request is not waiting, handle the next request
       this.handleFriendRequests(requests);
     }
+  }
+
+  removeDuplicateRequests(requests: Request[]): Request[] {
+    const uniqueRequests: Request[] = [];
+    const senderSet: Set<string> = new Set();
+
+    for (const request of requests) {
+      if (!senderSet.has(request.sender)) {
+        senderSet.add(request.sender);
+        uniqueRequests.push(request);
+      }
+    }
+
+    return uniqueRequests;
   }
 
   handleFriendRequest(request: Request): Promise<void> {
@@ -99,12 +113,7 @@ export class HomeComponent implements OnInit {
         username: friendUsername, friend: this.username,
         _id: ''
       }).subscribe(() => {
-        Swal.fire({
-          title: 'Friendship successfully created.',
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 2000
-        });
+        console.log('Friendship created successfully');
       });
     });
   }
