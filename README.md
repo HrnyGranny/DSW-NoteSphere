@@ -14,6 +14,12 @@ Carlos Ordoño Moraleda
 
 ## Web Page
 
+### Manual start
+
+- Open deploy hook link:  https://api.render.com/deploy/srv-couc3fq1hbls7383didg?key=bDh2qS9l6y0
+- Wait 30 sec
+- Open aplication web page: https://frontend-nodesphere.onrender.com
+
 ### For Windows (.bat):
 
 #### Execution:
