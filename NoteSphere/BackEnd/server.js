@@ -21,11 +21,13 @@ const notesRouter = require('./routes/notes');
 const usersRouter = require('./routes/users');
 const friendsRouter = require('./routes/friends');
 const authRouter = require('./routes/auth');
+const requestRouter = require('./routes/requests');
 
 app.use('/api/notes', notesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/friends', friendsRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/requests', requestRouter);
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;

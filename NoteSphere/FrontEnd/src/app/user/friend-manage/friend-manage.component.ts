@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/users.service';
 import { FriendsService } from '../../services/friends.service';
+import { RequestsService } from '../../services/requests.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -16,7 +17,7 @@ export class FriendManageComponent implements OnInit {
   searchUser: string = '';
   friends: string[] = [];
 
-  constructor(private authService: AuthService, private userService: UserService, private friendsService: FriendsService, private router: Router) { }
+  constructor(private authService: AuthService, private userService: UserService, private friendsService: FriendsService, private router: Router, private requestsService: RequestsService) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
@@ -40,27 +41,29 @@ export class FriendManageComponent implements OnInit {
       });
       return;
     }
-  
+
+    if (this.friends.includes(this.searchUser)) {
+      Swal.fire({
+        title: 'This user is already your friend.',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      return;
+    }
+
     this.userService.checkUsernameExists(this.searchUser).subscribe(exists => {
       if (exists) {
-        // Create the friendship from the current user to the friend
-        this.friendsService.createFriend({
-          username: this.username, friend: this.searchUser,
-          _id: ''
-        }).subscribe(() => {
-          // Create the friendship from the friend to the current user
-          this.friendsService.createFriend({
-            username: this.searchUser, friend: this.username,
-            _id: ''
-          }).subscribe(() => {
-            this.loadFriends();
-            Swal.fire({
-              title: 'Friendship successfully created.',
-              icon: 'success',
-              showConfirmButton: false,
-              timer: 2000
-            });
+        // Create a friend request from the current user to the searched user
+        this.requestsService.createRequest(this.searchUser, this.username, 'wait').subscribe(() => {
+          Swal.fire({
+            title: 'Friend request sent.',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000
           });
+        }, error => {
+          console.error('Error sending friend request:', error);
         });
       } else {
         Swal.fire({
@@ -100,6 +103,7 @@ export class FriendManageComponent implements OnInit {
       }
     });
   }
+
   return(): void {
     this.router.navigate(['/user/friendship']);
   }
