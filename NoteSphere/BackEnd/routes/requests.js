@@ -36,4 +36,14 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({ error: err.message }));
 });
 
+router.get('/:sender', (req, res) => {
+  Request.find({ sender: req.params.sender }, (err, requests) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).json(requests);
+    }
+  });
+});
+
 module.exports = router;

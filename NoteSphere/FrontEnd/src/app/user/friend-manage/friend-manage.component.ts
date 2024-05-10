@@ -41,7 +41,7 @@ export class FriendManageComponent implements OnInit {
       });
       return;
     }
-
+  
     if (this.friends.includes(this.searchUser)) {
       Swal.fire({
         title: 'This user is already your friend.',
@@ -51,7 +51,21 @@ export class FriendManageComponent implements OnInit {
       });
       return;
     }
-
+  
+    // Get the sent requests from localStorage
+    let sentRequests = JSON.parse(localStorage.getItem('sentRequests') || '{}');
+  
+    // Check if there is already a sent request to this user
+    if (sentRequests[this.username] && sentRequests[this.username].includes(this.searchUser)) {
+      Swal.fire({
+        title: 'There is already a pending friend request to this user.',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      return;
+    }
+  
     this.userService.checkUsernameExists(this.searchUser).subscribe(exists => {
       if (exists) {
         // Create a friend request from the current user to the searched user
@@ -62,6 +76,13 @@ export class FriendManageComponent implements OnInit {
             showConfirmButton: false,
             timer: 2000
           });
+  
+          // Add the sent request to localStorage
+          if (!sentRequests[this.username]) {
+            sentRequests[this.username] = [];
+          }
+          sentRequests[this.username].push(this.searchUser);
+          localStorage.setItem('sentRequests', JSON.stringify(sentRequests));
         }, error => {
           console.error('Error sending friend request:', error);
         });

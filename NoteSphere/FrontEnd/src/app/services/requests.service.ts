@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Request } from '../models/request.model';
 import { environment } from '../environment/environment';
 
@@ -24,5 +24,12 @@ export class RequestsService {
   updateRequest(id: string, username: string, sender: string, status: string): Observable<Request> {
     const request = { username, sender, status };
     return this.http.put<Request>(`${this.apiUrl}/${id}`, request);
+  }
+
+  checkPendingRequest(sender: string, receiver: string): Observable<boolean> {
+    return this.http.get<Request[]>(`${this.apiUrl}/${sender}`)
+      .pipe(
+        map(requests => requests.some(request => request.username === receiver && request.status === 'wait'))
+      );
   }
 }
