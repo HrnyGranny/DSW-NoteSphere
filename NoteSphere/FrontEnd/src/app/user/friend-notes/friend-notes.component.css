@@ -102,10 +102,12 @@
     text-align: center;
   }
   
-  .friend-with-notes h2 {
-    text-align: center;
-    color: #333;
-  }
+.friend-with-notes h2 {
+  text-align: center;
+  background-color: #FBB566; /* Fondo naranja para la cabecera */
+  color: white;
+  padding: 10px;
+}
   
   .notes-container {
     display: flex;
@@ -122,7 +124,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     min-width: 276px;
-    max-width: 320px;
+  max-width: 320px;
   }
   
   .note h3 {

@@ -1,16 +1,22 @@
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 <div class="container">
   <div class="welcome-banner">
     <span id="username">Manage Friends</span>
   </div>
   <div class="content">
-    <input [(ngModel)]="searchUser" placeholder="Buscar usuario">
+    <div class="container-1">
+      <span class="icon"><i class="fa fa-search"></i></span>
+      <input [(ngModel)]="searchUser" placeholder="Search user...">
+    </div>
     <button (click)="addFriend()">Agregar amigo</button>
     <hr>
     <h2>Mis amigos</h2>
     <ul>
       <li *ngFor="let friend of friends">
-        {{friend}}
-        <button (click)="deleteFriend(friend)">Eliminar amigo</button>
+        {{ friend }}
+        <!-- Asegúrate que el botón de eliminar tenga la clase 'delete' para el estilo rojo -->
+        <button class="delete" (click)="deleteFriend(friend)">Eliminar amigo</button>
       </li>
     </ul>
   </div>
